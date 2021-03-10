@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">Rest Planner</string>
+    <string name="every_15_minutes">Каждые 15 минут</string>
+    <string name="every_30_minutes">Каждые 30 минут</string>
+    <string name="every_45_minutes">Каждые 45 минут</string>
+    <string name="every_60_minutes">Каждые 60 минут</string>
+    <string name="every_90_minutes">Каждые 90 минут</string>
+    <string name="rest_enabled">Rest enabled</string>
+    <string name="time">Time</string>
+    <string name="days">Days</string>
 </resources>
