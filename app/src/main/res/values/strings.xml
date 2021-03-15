@@ -8,4 +8,8 @@
     <string name="rest_enabled">Rest enabled</string>
     <string name="time">Time</string>
     <string name="days">Days</string>
+    <string name="notification_period_id">Notification period</string>
+    <string name="is_rest_planner_checked">Is rest planner checked</string>
+    <string name="channel_name">Rest planner notification channel</string>
+    <string name="channel_description">Rest planner notification channel description</string>
 </resources>

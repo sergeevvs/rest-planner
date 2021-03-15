@@ -14,5 +14,6 @@
         <!-- Customize your theme here. -->
         <item name="radioButtonStyle">@style/RestPlanner.RadioButton</item>
         <item name="android:textViewStyle">@style/RestPlanner.TextView</item>
+        <item name="bottomSheetDialogTheme">@style/RestPlanner.BottomSheetDialogTheme</item>
     </style>
 </resources>
