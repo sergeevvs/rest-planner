@@ -12,8 +12,10 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
-        <item name="radioButtonStyle">@style/RestPlanner.RadioButton</item>
+        <item name="colorBottomSheetDialog">@color/white</item>
+        <item name="colorTextOnBottomSheetDialog">@color/black</item>
+
         <item name="android:textViewStyle">@style/RestPlanner.TextView</item>
-        <item name="bottomSheetDialogTheme">@style/RestPlanner.BottomSheetDialogTheme</item>
+        <item name="bottomSheetDialogTheme">@style/RestPlanner.BottomSheetDialog</item>
     </style>
 </resources>

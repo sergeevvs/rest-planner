@@ -1,23 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="RestPlanner.RadioButton" parent="Widget.AppCompat.CompoundButton.RadioButton">
-        <item name="android:textColor">@color/black</item>
+    <style name="RestPlanner.RadioButton" parent="Widget.MaterialComponents.CompoundButton.RadioButton">
         <item name="android:textSize">@dimen/rb_text_size</item>
         <item name="android:padding">@dimen/rb_padding</item>
-        <item name="android:layout_margin">@dimen/rb_padding</item>
+        <item name="android:textColor">?attr/colorTextOnBottomSheetDialog</item>
     </style>
 
     <style name="RestPlanner.TextView" parent="Widget.MaterialComponents.TextView">
-        <item name="android:textColor">@color/black</item>
         <item name="android:textSize">@dimen/text_size</item>
     </style>
-    
-    <style name="RestPlanner.BottomSheetDialogTheme" parent="Theme.Design.Light.BottomSheetDialog">
-        <item name="bottomSheetStyle">@style/RestPlanner.ModalStyle</item>
+
+    <style name="RestPlanner.BottomSheetDialog" parent="Theme.MaterialComponents.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/RestPlanner.BottomSheet</item>
     </style>
 
-    <style name="RestPlanner.ModalStyle" parent="Widget.Design.BottomSheet.Modal">
-        <item name="android:background">@drawable/rounded_dialog</item>
+    <style name="RestPlanner.BottomSheet" parent="Widget.MaterialComponents.BottomSheet">
+        <item name="shapeAppearanceOverlay">@style/RestPlanner.ShapeAppearanceOverlay</item>
+        <item name="backgroundTint">?attr/colorBottomSheetDialog</item>
+    </style>
+
+    <style name="RestPlanner.ShapeAppearanceOverlay" parent="">
+        <item name="cornerSize">0dp</item>
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSizeTopLeft">@dimen/corner_size</item>
+        <item name="cornerSizeTopRight">@dimen/corner_size</item>
     </style>
 </resources>

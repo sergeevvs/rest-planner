@@ -3,7 +3,7 @@
     <dimen name="layout_padding">32dp</dimen>
     <dimen name="text_size">18sp</dimen>
     <dimen name="rb_text_size">16sp</dimen>
-    <dimen name="rb_padding">16dp</dimen>
+    <dimen name="rb_padding">8dp</dimen>
     <dimen name="btn_margin">8dp</dimen>
     <dimen name="corner_size">16dp</dimen>
 </resources>
