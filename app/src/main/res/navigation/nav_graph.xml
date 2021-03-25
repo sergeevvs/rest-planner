@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/mainFragment"
-        android:name="com.github.sergeevvs.restplanner.MainFragment"
+        android:name="com.github.sergeevvs.restplanner.presentation.fragments.MainFragment"
         android:label="MainFragment"
         tools:layout="@layout/fragment_main">
         <action
@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/timeFragment"
-        android:name="com.github.sergeevvs.restplanner.TimeFragment"
+        android:name="com.github.sergeevvs.restplanner.presentation.fragments.TimeFragment"
         android:label="TimeFragment"
         tools:layout="@layout/fragment_time" />
 </navigation>

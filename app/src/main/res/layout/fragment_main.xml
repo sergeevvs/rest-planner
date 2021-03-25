@@ -6,7 +6,7 @@
     android:padding="@dimen/layout_padding">
 
     <com.google.android.material.switchmaterial.SwitchMaterial
-        android:id="@+id/switch_rest_planner_enabled"
+        android:id="@+id/switch_planner_enabled"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -24,7 +24,7 @@
         android:text="@string/time"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/switch_rest_planner_enabled" />
+        app:layout_constraintTop_toBottomOf="@+id/switch_planner_enabled" />
 
     <Button
         android:id="@+id/btn_days"

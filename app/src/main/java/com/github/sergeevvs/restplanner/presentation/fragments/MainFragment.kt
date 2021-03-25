@@ -1,4 +1,4 @@
-package com.github.sergeevvs.restplanner
+package com.github.sergeevvs.restplanner.presentation.fragments
 
 import android.app.NotificationChannel
 import android.app.NotificationManager
@@ -11,34 +11,49 @@ import android.view.ViewGroup
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
+import com.github.sergeevvs.restplanner.App
+import com.github.sergeevvs.restplanner.R
 import com.github.sergeevvs.restplanner.databinding.FragmentMainBinding
+import com.github.sergeevvs.restplanner.presentation.viewmodels.PlannerViewModel
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.switchmaterial.SwitchMaterial
 
 
 class MainFragment : Fragment() {
 
-    private val sharedPref by lazy { activity?.getPreferences(Context.MODE_PRIVATE) }
+    private val viewModel: PlannerViewModel by activityViewModels {
+        (context?.applicationContext as App).viewModelFactory
+    }
+    private val binding by lazy { FragmentMainBinding.inflate(layoutInflater) }
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
-        val binding = FragmentMainBinding.inflate(layoutInflater)
+        createNotificationChannel() // todo внедрить сервис, который будет этим заниматься
+        return binding.root
+    }
 
-        createNotificationChannel()
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        init()
+        initListeners()
+    }
 
-        /* init block */
-        binding.switchRestPlannerEnabled.isChecked =
-            sharedPref?.getBoolean(getString(R.string.is_rest_planner_checked), false) ?: false
+    private fun init() {
+        binding.switchPlannerEnabled.isChecked = viewModel.plannerActive
+    }
 
-        /* listeners */
-        binding.switchRestPlannerEnabled.setOnClickListener(this::onSwitchClicked)
+    private fun initListeners() {
+        binding.switchPlannerEnabled.setOnClickListener(this::onSwitchClicked)
         binding.btnTime.setOnClickListener(this::onBtnTimeClicked)
         binding.btnDays.setOnClickListener(this::onBtnDaysClicked)
+    }
 
-        return binding.root
+    private fun onSwitchClicked(view: View) {
+        viewModel.plannerActive = (view as SwitchMaterial).isChecked
     }
 
     private fun onBtnTimeClicked(view: View) {
@@ -57,13 +72,6 @@ class MainFragment : Fragment() {
         with(NotificationManagerCompat.from(requireContext())) {
             notify(0, builder.build())
         }
-    }
-
-    private fun onSwitchClicked(view: View) {
-        sharedPref?.edit()?.putBoolean(
-            getString(R.string.is_rest_planner_checked),
-            (view as SwitchMaterial).isChecked
-        )?.apply()
     }
 
     private fun createNotificationChannel() {

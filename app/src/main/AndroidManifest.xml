@@ -11,13 +11,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.RestPlanner">
         <service
-            android:name=".RestPlannerService"
+            android:name=".domain.RestPlannerService"
             android:enabled="true"
             android:exported="true">
 
         </service>
 
-        <activity android:name=".MainActivity">
+        <activity android:name=".presentation.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
