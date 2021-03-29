@@ -61,17 +61,7 @@ class MainFragment : Fragment() {
     }
 
     private fun onBtnDaysClicked(view: View) {
-        Snackbar.make(view, "Days will be enabled later.", Snackbar.LENGTH_LONG).show()
-
-        val builder = NotificationCompat.Builder(requireContext(), CHANNEL_ID)
-            .setSmallIcon(R.mipmap.ic_launcher)
-            .setContentTitle("Rest planner")
-            .setContentText("Вам пора отдохнуть.")
-            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-
-        with(NotificationManagerCompat.from(requireContext())) {
-            notify(0, builder.build())
-        }
+        DaysFragment().show(parentFragmentManager, DAYS_FRAGMENT_TAG)
     }
 
     private fun createNotificationChannel() {
@@ -92,6 +82,7 @@ class MainFragment : Fragment() {
     companion object {
 
         const val TIME_FRAGMENT_TAG = "Time fragment"
+        const val DAYS_FRAGMENT_TAG = "Days fragment"
         const val CHANNEL_ID = "rest_planner_channel_id"
     }
 }
