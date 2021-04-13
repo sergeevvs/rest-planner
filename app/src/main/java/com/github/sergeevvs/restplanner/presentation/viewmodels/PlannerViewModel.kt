@@ -1,7 +1,6 @@
 package com.github.sergeevvs.restplanner.presentation.viewmodels
 
 import androidx.lifecycle.ViewModel
-import com.github.sergeevvs.restplanner.data.Days
 import com.github.sergeevvs.restplanner.data.Preferences
 
 class PlannerViewModel(

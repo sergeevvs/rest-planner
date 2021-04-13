@@ -7,7 +7,6 @@
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/tv_choose_days"
-        style="@style/RestPlanner.TextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/rest_days"
@@ -17,6 +16,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
+        android:id="@+id/cb_group"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -25,68 +25,47 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_choose_days">
 
-        <com.google.android.material.switchmaterial.SwitchMaterial
-            android:id="@+id/switch_monday"
-            android:layout_width="wrap_content"
+        <com.google.android.material.checkbox.MaterialCheckBox
+            android:id="@+id/cb_monday"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:minEms="10"
-            android:text="@string/monday"
-            android:textColor="@color/black"
-            android:textSize="16sp" />
+            android:text="@string/monday" />
 
-        <com.google.android.material.switchmaterial.SwitchMaterial
-            android:id="@+id/switch_tuesday"
-            android:layout_width="wrap_content"
+        <com.google.android.material.checkbox.MaterialCheckBox
+            android:id="@+id/cb_tuesday"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:minEms="10"
-            android:text="@string/tuesday"
-            android:textColor="@color/black"
-            android:textSize="16sp" />
+            android:text="@string/tuesday" />
 
-        <com.google.android.material.switchmaterial.SwitchMaterial
-            android:id="@+id/switch_wednesday"
-            android:layout_width="wrap_content"
+        <com.google.android.material.checkbox.MaterialCheckBox
+            android:id="@+id/cb_wednesday"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:minEms="10"
-            android:text="@string/wednesday"
-            android:textColor="@color/black"
-            android:textSize="16sp" />
+            android:text="@string/wednesday" />
 
-        <com.google.android.material.switchmaterial.SwitchMaterial
-            android:id="@+id/switch_thursday"
-            android:layout_width="wrap_content"
+        <com.google.android.material.checkbox.MaterialCheckBox
+            android:id="@+id/cb_thursday"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:minEms="10"
-            android:text="@string/thursday"
-            android:textColor="@color/black"
-            android:textSize="16sp" />
+            android:text="@string/thursday" />
 
-        <com.google.android.material.switchmaterial.SwitchMaterial
-            android:id="@+id/switch_friday"
-            android:layout_width="wrap_content"
+        <com.google.android.material.checkbox.MaterialCheckBox
+            android:id="@+id/cb_friday"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:minEms="10"
-            android:text="@string/friday"
-            android:textColor="@color/black"
-            android:textSize="16sp" />
+            android:text="@string/friday" />
 
-        <com.google.android.material.switchmaterial.SwitchMaterial
-            android:id="@+id/switch_saturday"
-            android:layout_width="wrap_content"
+        <com.google.android.material.checkbox.MaterialCheckBox
+            android:id="@+id/cb_saturday"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:minEms="10"
-            android:text="@string/saturday"
-            android:textColor="@color/black"
-            android:textSize="16sp" />
+            android:text="@string/saturday" />
 
-        <com.google.android.material.switchmaterial.SwitchMaterial
-            android:id="@+id/switch_sunday"
-            android:layout_width="wrap_content"
+        <com.google.android.material.checkbox.MaterialCheckBox
+            android:id="@+id/cb_sunday"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:minEms="10"
-            android:text="@string/sunday"
-            android:textColor="@color/black"
-            android:textSize="16sp" />
+            android:text="@string/sunday" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
