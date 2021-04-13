@@ -54,6 +54,7 @@ class MainFragment : Fragment() {
 
     private fun onSwitchClicked(view: View) {
         viewModel.plannerActive = (view as SwitchMaterial).isChecked
+        viewModel.updateAlarmManager(requireContext())
     }
 
     private fun onBtnTimeClicked(view: View) {

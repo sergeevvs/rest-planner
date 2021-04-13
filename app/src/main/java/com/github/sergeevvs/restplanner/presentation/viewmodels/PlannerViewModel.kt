@@ -1,11 +1,20 @@
 package com.github.sergeevvs.restplanner.presentation.viewmodels
 
+import android.app.AlarmManager
+import android.app.PendingIntent
+import android.content.Context
+import android.content.Intent
+import android.os.SystemClock
 import androidx.lifecycle.ViewModel
+import com.github.sergeevvs.restplanner.data.AlarmReceiver
 import com.github.sergeevvs.restplanner.data.Preferences
 
 class PlannerViewModel(
     private val preferences: Preferences
 ) : ViewModel() {
+
+    private var alarmManager: AlarmManager? = null
+    private lateinit var alarmIntent: PendingIntent
 
     var plannerActive: Boolean
         get() = preferences.active
@@ -60,4 +69,20 @@ class PlannerViewModel(
         set(value) {
             preferences.sunday = value
         }
+
+    fun updateAlarmManager(context: Context) {
+        if (plannerActive) {
+            alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+            alarmIntent = Intent(context, AlarmReceiver::class.java).let { intent ->
+                PendingIntent.getBroadcast(context, 0, intent, 0)
+            }
+
+            /* Тестирование, для повторяющихся алармов нужно пользоваться методом setRepeating */
+            alarmManager?.set(
+                AlarmManager.RTC_WAKEUP,
+                SystemClock.elapsedRealtime() + 10 * 1000,
+                alarmIntent
+            )
+        }
+    }
 }
