@@ -124,7 +124,6 @@ class PlannerViewModel(
     }
 
     companion object {
-
         const val restWorkName = "Rest worker"
     }
 }

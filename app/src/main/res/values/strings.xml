@@ -1,19 +1,15 @@
 <resources>
-    <string name="app_name">Rest Planner</string>
+    <string name="app_name">Планировщик отдыха</string>
     <string name="every_15_minutes">Каждые 15 минут</string>
     <string name="every_30_minutes">Каждые 30 минут</string>
     <string name="every_45_minutes">Каждые 45 минут</string>
     <string name="every_60_minutes">Каждые 60 минут</string>
     <string name="every_90_minutes">Каждые 90 минут</string>
-    <string name="rest_enabled">Rest enabled</string>
-    <string name="time">Time</string>
-    <string name="days">Days</string>
-    <string name="notification_period_id">Notification period</string>
-    <string name="is_rest_planner_checked">Is rest planner checked</string>
-    <string name="channel_name">Rest planner notification channel</string>
-    <string name="channel_description">Rest planner notification channel description</string>
-    <string name="rest_time_period">Выберите периодичность оповещений</string>
-    <string name="rest_days">Выберите дни оповещений</string>
+    <string name="rest_enabled">Активность</string>
+    <string name="time">Время</string>
+    <string name="days">Дни</string>
+    <string name="rest_time_period">Периодичность оповещений</string>
+    <string name="rest_days">Дни активности</string>
     <string name="monday">Понедельник</string>
     <string name="tuesday">Вторник</string>
     <string name="wednesday">Среда</string>
@@ -21,5 +17,11 @@
     <string name="friday">Пятница</string>
     <string name="saturday">Суббота</string>
     <string name="sunday">Воскресенье</string>
-    <string name="notification_title">Вам пора отдохнуть от работы!</string>
+    <string name="notification_title">Время отдохнуть от работы ^_^</string>
+
+    <!-- Служебные ресурсы -->
+    <string name="notification_period_id">Notification period</string>
+    <string name="is_rest_planner_checked">Is rest planner checked</string>
+    <string name="channel_name">Rest planner notification channel</string>
+    <string name="channel_description">For periodic rest notifications</string>
 </resources>

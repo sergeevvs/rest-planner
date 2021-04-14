@@ -41,7 +41,7 @@ class InstrumentedTest {
         val testDriver = WorkManagerTestInitHelper.getTestDriver(context)
 
         workManager.enqueue(request).result.get()
-        Thread.sleep(5000)
+        Thread.sleep(10000)
         testDriver?.setPeriodDelayMet(request.id)
         val workInfo = workManager.getWorkInfoById(request.id).get()
 

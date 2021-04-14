@@ -62,7 +62,6 @@ class Preferences(context: Context) {
         }
 
     companion object {
-
         const val APP_SETTINGS = "app_settings"
         const val ACTIVE = "active"
         const val TIME = "time"
