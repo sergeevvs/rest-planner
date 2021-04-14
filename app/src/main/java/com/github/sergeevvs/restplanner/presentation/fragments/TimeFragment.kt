@@ -31,14 +31,14 @@ class TimeFragment : BottomSheetDialogFragment() {
     }
 
     private fun init() {
-        binding.rgTime.check(viewModel.plannerTime)
+        binding.rgTime.check(viewModel.getRadioButtonByTime())
     }
 
     private fun initListeners() {
-        binding.rgTime.setOnCheckedChangeListener(this::saveNotificationPeriodId)
+        binding.rgTime.setOnCheckedChangeListener(this::saveNotificationPeriod)
     }
 
-    private fun saveNotificationPeriodId(radioGroup: RadioGroup, i: Int) {
-        viewModel.plannerTime = i
+    private fun saveNotificationPeriod(radioGroup: RadioGroup, i: Int) {
+        viewModel.saveNotificationPeriod(resources, radioGroup)
     }
 }

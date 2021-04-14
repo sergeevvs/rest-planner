@@ -8,15 +8,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.app.NotificationCompat
-import androidx.core.app.NotificationManagerCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.github.sergeevvs.restplanner.App
 import com.github.sergeevvs.restplanner.R
 import com.github.sergeevvs.restplanner.databinding.FragmentMainBinding
 import com.github.sergeevvs.restplanner.presentation.viewmodels.PlannerViewModel
-import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.switchmaterial.SwitchMaterial
 
 
@@ -54,7 +51,7 @@ class MainFragment : Fragment() {
 
     private fun onSwitchClicked(view: View) {
         viewModel.plannerActive = (view as SwitchMaterial).isChecked
-        viewModel.updateAlarmManager(requireContext())
+        viewModel.updateNotificationManager(requireContext().applicationContext)
     }
 
     private fun onBtnTimeClicked(view: View) {
