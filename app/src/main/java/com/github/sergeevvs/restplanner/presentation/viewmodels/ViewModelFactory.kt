@@ -1,6 +1,5 @@
 package com.github.sergeevvs.restplanner.presentation.viewmodels
 
-import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.github.sergeevvs.restplanner.data.Preferences

@@ -2,6 +2,7 @@ package com.github.sergeevvs.restplanner.presentation.viewmodels
 
 import android.content.Context
 import android.content.res.Resources
+import android.util.Log
 import android.widget.RadioButton
 import android.widget.RadioGroup
 import androidx.core.view.children
@@ -9,6 +10,7 @@ import androidx.lifecycle.ViewModel
 import androidx.work.ExistingPeriodicWorkPolicy
 import androidx.work.PeriodicWorkRequestBuilder
 import androidx.work.WorkManager
+import com.github.sergeevvs.restplanner.App
 import com.github.sergeevvs.restplanner.R
 import com.github.sergeevvs.restplanner.data.NotificationWorker
 import com.github.sergeevvs.restplanner.data.Preferences
@@ -74,33 +76,34 @@ class PlannerViewModel(
             preferences.sunday = value
         }
 
-    // При изменении состояния planner active switch апдейтим менеджер нотификаций
+    // При изменении настроек апдейтим менеджер нотификаций
     fun updateNotificationManager(appContext: Context) {
         workManager = WorkManager.getInstance(appContext)
-        val notificationRequest =
-            PeriodicWorkRequestBuilder<NotificationWorker>(
-                plannerTime.toLong(), TimeUnit.MINUTES,
-                0, TimeUnit.MINUTES
-            ).build()
+        val notificationRequest = PeriodicWorkRequestBuilder<NotificationWorker>(
+            plannerTime.toLong(),
+            TimeUnit.MINUTES
+        ).build() // setInitialDelay() сделать обработку отсчета от конкретного времени
         if (plannerActive) {
             workManager?.enqueueUniquePeriodicWork(
-                restWorkName,
-                ExistingPeriodicWorkPolicy.KEEP,
+                REST_WORK_NAME,
+                ExistingPeriodicWorkPolicy.REPLACE,
                 notificationRequest
             )
         } else {
-            workManager?.cancelUniqueWork(restWorkName)
+            workManager?.cancelUniqueWork(REST_WORK_NAME)
         }
+        Log.d(App.LOG_TAG, "Rest planner activating set $plannerActive")
     }
 
     fun saveNotificationPeriod(resources: Resources, radioGroup: RadioGroup) {
         for (rb in radioGroup.children)
             if ((rb as RadioButton).isChecked)
                 plannerTime = getTimeByRadioButton(resources, rb)
+        Log.d(App.LOG_TAG, "New notification period - $plannerTime minutes")
     }
 
     private fun getTimeByRadioButton(resources: Resources, rb: RadioButton): Int {
-        return when(rb.text) {
+        return when (rb.text) {
             resources.getString(R.string.every_15_minutes) -> 15
             resources.getString(R.string.every_30_minutes) -> 30
             resources.getString(R.string.every_45_minutes) -> 45
@@ -112,7 +115,7 @@ class PlannerViewModel(
     }
 
     fun getRadioButtonByTime(): Int {
-        return when(plannerTime) {
+        return when (plannerTime) {
             15 -> R.id.every_15_minutes
             30 -> R.id.every_30_minutes
             45 -> R.id.every_45_minutes
@@ -124,6 +127,6 @@ class PlannerViewModel(
     }
 
     companion object {
-        const val restWorkName = "Rest worker"
+        const val REST_WORK_NAME = "Rest worker"
     }
 }

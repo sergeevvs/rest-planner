@@ -1,6 +1,8 @@
 package com.github.sergeevvs.restplanner.data
 
+import android.app.PendingIntent
 import android.content.Context
+import android.content.Intent
 import android.graphics.Color
 import android.provider.Settings
 import android.util.Log
@@ -10,6 +12,7 @@ import androidx.work.Worker
 import androidx.work.WorkerParameters
 import com.github.sergeevvs.restplanner.App
 import com.github.sergeevvs.restplanner.R
+import com.github.sergeevvs.restplanner.presentation.MainActivity
 
 class NotificationWorker(
     appContext: Context,
@@ -20,7 +23,7 @@ class NotificationWorker(
         with(NotificationManagerCompat.from(applicationContext)) {
             notify(NOTIFICATION_ID, createNotification().build())
         }
-        Log.d(super.toString(), "Sent notification.")
+        Log.d(App.LOG_TAG, "Sent notification.")
 
         return Result.success()
     }
@@ -33,6 +36,13 @@ class NotificationWorker(
             .setVibrate(longArrayOf(0, 200, 200, 200))
             .setLights(Color.RED, 3000, 3000)
             .setSound(Settings.System.DEFAULT_NOTIFICATION_URI)
+            .setContentIntent(createPendingIntent())
+            .setAutoCancel(true)
+
+    private fun createPendingIntent(): PendingIntent {
+        val intent = Intent(applicationContext, MainActivity::class.java)
+        return PendingIntent.getActivity(applicationContext, 0, intent, 0)
+    }
 
 
     companion object {

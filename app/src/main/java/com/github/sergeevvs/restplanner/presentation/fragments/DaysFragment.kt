@@ -1,6 +1,7 @@
 package com.github.sergeevvs.restplanner.presentation.fragments
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -57,5 +58,6 @@ class DaysFragment : BottomSheetDialogFragment() {
             binding.cbSaturday -> viewModel.saturday = view.isChecked
             binding.cbSunday -> viewModel.sunday = view.isChecked
         }
+        Log.d(App.LOG_TAG, "Set ${view.text} activating in ${view.isChecked}")
     }
 }

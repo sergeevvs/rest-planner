@@ -40,5 +40,6 @@ class TimeFragment : BottomSheetDialogFragment() {
 
     private fun saveNotificationPeriod(radioGroup: RadioGroup, i: Int) {
         viewModel.saveNotificationPeriod(resources, radioGroup)
+        viewModel.updateNotificationManager(requireContext().applicationContext)
     }
 }

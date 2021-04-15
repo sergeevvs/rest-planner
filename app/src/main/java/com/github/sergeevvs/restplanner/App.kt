@@ -5,9 +5,7 @@ import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
 import android.graphics.Color
-import android.media.AudioAttributes
 import android.os.Build
-import android.provider.Settings
 import com.github.sergeevvs.restplanner.data.Preferences
 import com.github.sergeevvs.restplanner.presentation.viewmodels.ViewModelFactory
 
@@ -30,18 +28,13 @@ class App : Application() {
             val importance = NotificationManager.IMPORTANCE_HIGH
             val channel = NotificationChannel(CHANNEL_ID, name, importance).apply {
                 this.description = description
-                this.enableVibration(true)
-                this.vibrationPattern = longArrayOf(0, 200, 200, 200)
-                this.enableLights(true)
-                this.lightColor = Color.RED
-                this.setSound(
-                    Settings.System.DEFAULT_NOTIFICATION_URI,
-                    AudioAttributes.Builder().setUsage(AudioAttributes.USAGE_NOTIFICATION).build()
-                )
+                enableVibration(true)
+                vibrationPattern = longArrayOf(0, 200, 200, 200)
+                enableLights(true)
+                lightColor = Color.RED
             }
             val notificationManager =
                 getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-            notificationManager.deleteNotificationChannel(channel.id)
             notificationManager.createNotificationChannel(channel)
 
         }
@@ -49,5 +42,6 @@ class App : Application() {
 
     companion object {
         const val CHANNEL_ID = "rest_planner_channel_id"
+        const val LOG_TAG = "Rest planner log"
     }
 }
