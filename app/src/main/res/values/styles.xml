@@ -1,20 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="RestPlanner.MaterialThemeOverlay" parent="Theme.RestPlanner" />
-
-    <style name="RestPlanner.ActionBarThemeOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
-        <!-- title text color -->
-        <item name="android:textColorPrimary">?attr/colorTextOnBottomSheetDialog</item>
-    </style>
-
     <style name="RestPlanner.BottomSheetDialog" parent="Theme.MaterialComponents.BottomSheetDialog">
         <item name="bottomSheetStyle">@style/RestPlanner.BottomSheet</item>
-        <!-- Themes for components. -->
-        <item name="android:textViewStyle">@style/RestPlanner.TextView</item>
-        <item name="radioButtonStyle">@style/RestPlanner.RadioButton</item>
-        <item name="checkboxStyle">@style/RestPlanner.CheckBox</item>
-        <item name="switchStyle">@style/RestPlanner.Switch</item>
+        <item name="materialThemeOverlay">@style/Theme.RestPlanner</item>
     </style>
 
     <style name="RestPlanner.BottomSheet" parent="Widget.MaterialComponents.BottomSheet">
@@ -37,19 +26,16 @@
         <item name="android:textSize">@dimen/rb_text_size</item>
         <item name="android:padding">@dimen/rb_padding</item>
         <item name="android:textColor">?attr/colorTextOnBottomSheetDialog</item>
-        <item name="materialThemeOverlay">@style/RestPlanner.MaterialThemeOverlay</item>
     </style>
 
     <style name="RestPlanner.CheckBox" parent="Widget.MaterialComponents.CompoundButton.CheckBox">
         <item name="android:textColor">?attr/colorTextOnBottomSheetDialog</item>
         <item name="android:textSize">16sp</item>
-        <item name="materialThemeOverlay">@style/RestPlanner.MaterialThemeOverlay</item>
     </style>
 
     <style name="RestPlanner.Switch" parent="Widget.MaterialComponents.CompoundButton.Switch">
         <item name="android:ems">12</item>
         <item name="android:textColor">?attr/colorTextOnBottomSheetDialog</item>
         <item name="android:textSize">16sp</item>
-        <item name="materialThemeOverlay">@style/RestPlanner.MaterialThemeOverlay</item>
     </style>
 </resources>

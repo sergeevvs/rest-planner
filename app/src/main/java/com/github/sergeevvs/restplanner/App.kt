@@ -42,6 +42,6 @@ class App : Application() {
 
     companion object {
         const val CHANNEL_ID = "rest_planner_channel_id"
-        const val LOG_TAG = "Rest planner log"
+        const val LOG_TAG = "rest_planner_log"
     }
 }
