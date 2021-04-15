@@ -8,4 +8,23 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="dark_gray">#FF4B4B4B</color>
+    <color name="light_gray">#C8C8C8</color>
+    <!-- Custom colors -->
+    <color name="primaryColor">#fce0bb</color>
+    <color name="primaryLightColor">#ffffee</color>
+    <color name="primaryDarkColor">#c8ae8b</color>
+    <color name="secondaryColor">#fcb971</color>
+    <color name="secondaryLightColor">#ffeba1</color>
+    <color name="secondaryDarkColor">#c68944</color>
+    <color name="primaryTextColor">#000000</color>
+    <color name="secondaryTextColor">#000000</color>
+    <!-- Night colors -->
+    <color name="nightPrimaryColor">#4C4C4C</color>
+    <color name="nightPrimaryLightColor">#484848</color>
+    <color name="nightPrimaryDarkColor">#000000</color>
+    <color name="nightSecondaryColor">#eeeeee</color>
+    <color name="nightSecondaryLightColor">#ffffff</color>
+    <color name="nightSecondaryDarkColor">#bcbcbc</color>
+    <color name="nightPrimaryTextColor">#ffffff</color>
+    <color name="nightSecondaryTextColor">#000000</color>
 </resources>
