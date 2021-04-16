@@ -1,22 +1,23 @@
-package com.github.sergeevvs.restplanner.data
+package com.github.sergeevvs.restplanner.data.repositories
 
 import android.content.Context
 import android.content.Context.MODE_PRIVATE
+import com.github.sergeevvs.restplanner.data.Days
 
-class Preferences(context: Context) {
+class PreferencesRepository(context: Context) {
 
     private val preferences = context.getSharedPreferences(APP_SETTINGS, MODE_PRIVATE)
 
-    var active: Boolean
-        get() = preferences.getBoolean(ACTIVE, false)
+    var plannerActive: Boolean
+        get() = preferences.getBoolean(PLANNER_ACTIVE, false)
         set(value) {
-            preferences.edit().putBoolean(ACTIVE, value).apply()
+            preferences.edit().putBoolean(PLANNER_ACTIVE, value).apply()
         }
 
-    var time: Int
-        get() = preferences.getInt(TIME, 0)
+    var notificationPeriod: Int
+        get() = preferences.getInt(NOTIFICATION_PERIOD, 0)
         set(value) {
-            preferences.edit().putInt(TIME, value).apply()
+            preferences.edit().putInt(NOTIFICATION_PERIOD, value).apply()
         }
 
     var monday: Boolean
@@ -63,7 +64,7 @@ class Preferences(context: Context) {
 
     companion object {
         const val APP_SETTINGS = "app_settings"
-        const val ACTIVE = "active"
-        const val TIME = "time"
+        const val PLANNER_ACTIVE = "planner_active"
+        const val NOTIFICATION_PERIOD = "notification_period"
     }
 }

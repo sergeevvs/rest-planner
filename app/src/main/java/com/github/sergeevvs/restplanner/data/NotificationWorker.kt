@@ -25,6 +25,8 @@ class NotificationWorker(
         }
         Log.d(App.LOG_TAG, "Sent notification.")
 
+
+
         return Result.success()
     }
 

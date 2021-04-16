@@ -11,7 +11,6 @@ import com.github.sergeevvs.restplanner.databinding.FragmentMainBinding
 import com.github.sergeevvs.restplanner.presentation.viewmodels.PlannerViewModel
 import com.google.android.material.switchmaterial.SwitchMaterial
 
-
 class MainFragment : Fragment() {
 
     private val viewModel: PlannerViewModel by activityViewModels {
@@ -34,18 +33,17 @@ class MainFragment : Fragment() {
     }
 
     private fun init() {
-        binding.switchPlannerEnabled.isChecked = viewModel.plannerActive
+        binding.switchPlannerState.isChecked = viewModel.plannerActive
     }
 
     private fun initListeners() {
-        binding.switchPlannerEnabled.setOnClickListener(this::onSwitchClicked)
+        binding.switchPlannerState.setOnClickListener(this::onSwitchClicked)
         binding.btnTime.setOnClickListener(this::onBtnTimeClicked)
         binding.btnDays.setOnClickListener(this::onBtnDaysClicked)
     }
 
     private fun onSwitchClicked(view: View) {
-        viewModel.plannerActive = (view as SwitchMaterial).isChecked
-        viewModel.updateNotificationManager(requireContext().applicationContext)
+        viewModel.plannerActive = ((view as SwitchMaterial).isChecked)
     }
 
     private fun onBtnTimeClicked(view: View) {
@@ -57,7 +55,7 @@ class MainFragment : Fragment() {
     }
 
     companion object {
-        const val TIME_FRAGMENT_TAG = "Time fragment"
-        const val DAYS_FRAGMENT_TAG = "Days fragment"
+        const val TIME_FRAGMENT_TAG = "time_fragment"
+        const val DAYS_FRAGMENT_TAG = "days_fragment"
     }
 }

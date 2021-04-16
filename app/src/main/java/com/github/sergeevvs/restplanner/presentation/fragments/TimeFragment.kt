@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.RadioGroup
 import androidx.fragment.app.activityViewModels
 import com.github.sergeevvs.restplanner.App
 import com.github.sergeevvs.restplanner.databinding.FragmentTimeBinding
@@ -27,19 +26,15 @@ class TimeFragment : BottomSheetDialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         init()
-        initListeners()
     }
 
     private fun init() {
         binding.rgTime.check(viewModel.getRadioButtonByTime())
     }
 
-    private fun initListeners() {
-        binding.rgTime.setOnCheckedChangeListener(this::saveNotificationPeriod)
-    }
-
-    private fun saveNotificationPeriod(radioGroup: RadioGroup, i: Int) {
-        viewModel.saveNotificationPeriod(resources, radioGroup)
-        viewModel.updateNotificationManager(requireContext().applicationContext)
+    override fun onStop() {
+        super.onStop()
+        viewModel.onSaveNotificationPeriod(resources, binding.rgTime)
+        viewModel.onFragmentStop()
     }
 }

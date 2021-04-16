@@ -6,18 +6,23 @@ import android.app.NotificationManager
 import android.content.Context
 import android.graphics.Color
 import android.os.Build
-import com.github.sergeevvs.restplanner.data.Preferences
+import androidx.work.WorkManager
+import com.github.sergeevvs.restplanner.data.repositories.PreferencesRepository
+import com.github.sergeevvs.restplanner.domain.interactors.PlannerInteractor
 import com.github.sergeevvs.restplanner.presentation.viewmodels.ViewModelFactory
 
 class App : Application() {
 
-    private lateinit var preferences: Preferences
     lateinit var viewModelFactory: ViewModelFactory
+        private set
 
     override fun onCreate() {
         super.onCreate()
-        preferences = Preferences(this)
-        viewModelFactory = ViewModelFactory(preferences)
+
+        val preferencesRepository = PreferencesRepository(this)
+        val workManager = WorkManager.getInstance(this)
+        val plannerInteractor = PlannerInteractor(workManager, preferencesRepository)
+        viewModelFactory = ViewModelFactory(plannerInteractor)
         createNotificationChannel()
     }
 
@@ -36,7 +41,6 @@ class App : Application() {
             val notificationManager =
                 getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
             notificationManager.createNotificationChannel(channel)
-
         }
     }
 
