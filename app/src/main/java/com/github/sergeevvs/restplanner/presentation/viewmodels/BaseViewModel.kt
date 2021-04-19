@@ -34,8 +34,14 @@ abstract class BaseViewModel : ViewModel() {
         }
     }
 
+    /**
+     * Метод высчитывает время до следующей нотификации, учитывая дни и время активности планировщика,
+     * обеденное время (если оно включено).
+     * */
     private fun getNotificationTimeDiff(): Long {
-        return prefRepository.notificationPeriod.toLong() * 60 * 1000
+        val result: Long = prefRepository.notificationPeriod.toLong() * 60 * 1000
+
+        return result
     }
 
     private fun getNotificationData() = workDataOf(

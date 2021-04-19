@@ -5,7 +5,6 @@
     android:layout_height="match_parent"
     android:padding="@dimen/layout_padding">
 
-
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/tv_choose_period"
         android:layout_width="wrap_content"

@@ -26,6 +26,18 @@ class PreferencesRepository @Inject constructor(@ApplicationContext appContext: 
             preferences.edit().putInt(NOTIFICATION_PERIOD, value).apply()
         }
 
+    var startTime: Long
+        get() = preferences.getLong(START_TIME, 0L)
+        set(value) {
+            preferences.edit().putLong(START_TIME, value).apply()
+        }
+
+    var endTime: Long
+        get() = preferences.getLong(END_TIME, 0L)
+        set(value) {
+            preferences.edit().putLong(END_TIME, value).apply()
+        }
+
     fun isDayActive(day: Days) = preferences.getBoolean(day.toString(), false)
 
     fun setDayActive(day: Days, value: Boolean) {
@@ -37,5 +49,7 @@ class PreferencesRepository @Inject constructor(@ApplicationContext appContext: 
         const val APP_SETTINGS = "app_settings"
         const val PLANNER_ACTIVE = "planner_active"
         const val NOTIFICATION_PERIOD = "notification_period"
+        const val START_TIME = "start_time"
+        const val END_TIME = "end_time"
     }
 }

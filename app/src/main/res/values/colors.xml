@@ -12,7 +12,7 @@
     <!-- Custom colors -->
     <color name="primaryColor">#093243</color>
     <color name="primaryLightColor">#395b6e</color>
-    <color name="primaryDarkColor">#000a1c</color>
+    <color name="primaryDarkColor">#091E2F</color>
     <color name="secondaryColor">#3ddb84</color>
     <color name="secondaryLightColor">#7affb4</color>
     <color name="secondaryDarkColor">#00a856</color>
