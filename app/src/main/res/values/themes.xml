@@ -21,7 +21,7 @@
         <item name="switchStyle">@style/RestPlanner.Switch</item>
         <item name="materialButtonStyle">@style/RestPlanner.Button</item>
         <!-- Custom attrs. -->
-        <item name="colorBottomSheetDialog">@color/black</item>
+        <item name="colorBottomSheetDialog">@color/primaryColor</item>
         <item name="colorTextOnBottomSheetDialog">@color/white</item>
     </style>
 </resources>
