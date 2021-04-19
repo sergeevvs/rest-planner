@@ -44,7 +44,6 @@ class NotificationWorker(
         return PendingIntent.getActivity(applicationContext, 0, intent, 0)
     }
 
-
     companion object {
         const val NOTIFICATION_ID = 888
     }

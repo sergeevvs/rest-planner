@@ -5,18 +5,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
-import com.github.sergeevvs.restplanner.App
 import com.github.sergeevvs.restplanner.databinding.FragmentMainBinding
-import com.github.sergeevvs.restplanner.presentation.viewmodels.PlannerViewModel
+import com.github.sergeevvs.restplanner.presentation.viewmodels.MainViewModel
 import com.google.android.material.switchmaterial.SwitchMaterial
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
-
+@AndroidEntryPoint
 class MainFragment : Fragment() {
 
-    private val viewModel: PlannerViewModel by activityViewModels {
-        (context?.applicationContext as App).viewModelFactory
-    }
+    @Inject
+    lateinit var viewModel: MainViewModel
     private val binding by lazy { FragmentMainBinding.inflate(layoutInflater) }
 
     override fun onCreateView(
@@ -34,30 +33,29 @@ class MainFragment : Fragment() {
     }
 
     private fun init() {
-        binding.switchPlannerEnabled.isChecked = viewModel.plannerActive
+        binding.switchPlannerState.isChecked = viewModel.plannerActive
     }
 
     private fun initListeners() {
-        binding.switchPlannerEnabled.setOnClickListener(this::onSwitchClicked)
-        binding.btnTime.setOnClickListener(this::onBtnTimeClicked)
-        binding.btnDays.setOnClickListener(this::onBtnDaysClicked)
+        binding.switchPlannerState.setOnClickListener { onSwitchClicked(it) }
+        binding.btnTime.setOnClickListener { onBtnTimeClicked() }
+        binding.btnDays.setOnClickListener { onBtnDaysClicked() }
     }
 
     private fun onSwitchClicked(view: View) {
-        viewModel.plannerActive = (view as SwitchMaterial).isChecked
-        viewModel.updateNotificationManager(requireContext().applicationContext)
+        viewModel.plannerActive = ((view as SwitchMaterial).isChecked)
     }
 
-    private fun onBtnTimeClicked(view: View) {
+    private fun onBtnTimeClicked() {
         TimeFragment().show(parentFragmentManager, TIME_FRAGMENT_TAG)
     }
 
-    private fun onBtnDaysClicked(view: View) {
+    private fun onBtnDaysClicked() {
         DaysFragment().show(parentFragmentManager, DAYS_FRAGMENT_TAG)
     }
 
     companion object {
-        const val TIME_FRAGMENT_TAG = "Time fragment"
-        const val DAYS_FRAGMENT_TAG = "Days fragment"
+        const val TIME_FRAGMENT_TAG = "time_fragment"
+        const val DAYS_FRAGMENT_TAG = "days_fragment"
     }
 }

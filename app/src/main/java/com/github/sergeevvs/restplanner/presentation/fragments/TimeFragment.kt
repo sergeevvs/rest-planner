@@ -4,18 +4,17 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.RadioGroup
-import androidx.fragment.app.activityViewModels
-import com.github.sergeevvs.restplanner.App
 import com.github.sergeevvs.restplanner.databinding.FragmentTimeBinding
-import com.github.sergeevvs.restplanner.presentation.viewmodels.PlannerViewModel
+import com.github.sergeevvs.restplanner.presentation.viewmodels.TimeViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class TimeFragment : BottomSheetDialogFragment() {
 
-    private val viewModel: PlannerViewModel by activityViewModels {
-        (context?.applicationContext as App).viewModelFactory
-    }
+    @Inject
+    lateinit var viewModel: TimeViewModel
     private val binding by lazy { FragmentTimeBinding.inflate(layoutInflater) }
 
     override fun onCreateView(
@@ -27,19 +26,15 @@ class TimeFragment : BottomSheetDialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         init()
-        initListeners()
     }
 
     private fun init() {
         binding.rgTime.check(viewModel.getRadioButtonByTime())
     }
 
-    private fun initListeners() {
-        binding.rgTime.setOnCheckedChangeListener(this::saveNotificationPeriod)
-    }
-
-    private fun saveNotificationPeriod(radioGroup: RadioGroup, i: Int) {
-        viewModel.saveNotificationPeriod(resources, radioGroup)
-        viewModel.updateNotificationManager(requireContext().applicationContext)
+    override fun onStop() {
+        super.onStop()
+        viewModel.onSaveNotificationPeriod(resources, binding.rgTime)
+        viewModel.onFragmentStop()
     }
 }
