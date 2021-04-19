@@ -26,12 +26,12 @@ class TimeViewModel @Inject constructor() : BaseViewModel() {
         else -> 0
     }
 
-    fun getRadioButtonByTime() = when (prefRepository.notificationPeriod) {
+    /*fun getRadioButtonByTime() = when (prefRepository.notificationPeriod) {
         15 -> R.id.every_15_minutes
         30 -> R.id.every_30_minutes
         45 -> R.id.every_45_minutes
         60 -> R.id.every_60_minutes
         90 -> R.id.every_90_minutes
         else -> 0
-    }
+    }*/
 }

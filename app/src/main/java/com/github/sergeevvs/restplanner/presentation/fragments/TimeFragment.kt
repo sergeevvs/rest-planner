@@ -25,10 +25,10 @@ class TimeFragment : BottomSheetDialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        init()
+//        init()
     }
 
-    private fun init() {
+    /*private fun init() {
         binding.rgTime.check(viewModel.getRadioButtonByTime())
     }
 
@@ -36,5 +36,5 @@ class TimeFragment : BottomSheetDialogFragment() {
         super.onStop()
         viewModel.onSaveNotificationPeriod(resources, binding.rgTime)
         viewModel.onFragmentStop()
-    }
+    }*/
 }
