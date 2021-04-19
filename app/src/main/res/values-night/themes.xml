@@ -19,6 +19,7 @@
         <item name="radioButtonStyle">@style/RestPlanner.RadioButton</item>
         <item name="checkboxStyle">@style/RestPlanner.CheckBox</item>
         <item name="switchStyle">@style/RestPlanner.Switch</item>
+        <item name="materialButtonStyle">@style/RestPlanner.Button</item>
         <!-- Custom attrs. -->
         <item name="colorBottomSheetDialog">@color/dark_gray</item>
         <item name="colorTextOnBottomSheetDialog">@color/white</item>

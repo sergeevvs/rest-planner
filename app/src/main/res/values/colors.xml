@@ -10,15 +10,15 @@
     <color name="dark_gray">#FF4B4B4B</color>
     <color name="light_gray">#C8C8C8</color>
     <!-- Custom colors -->
-    <color name="primaryColor">#264653</color>
-    <color name="primaryLightColor">#52717f</color>
-    <color name="primaryDarkColor">#001f2a</color>
-    <color name="secondaryColor">#f4a261</color>
-    <color name="secondaryLightColor">#ffd390</color>
-    <color name="secondaryDarkColor">#be7334</color>
+    <color name="primaryColor">#093243</color>
+    <color name="primaryLightColor">#395b6e</color>
+    <color name="primaryDarkColor">#000a1c</color>
+    <color name="secondaryColor">#3ddb84</color>
+    <color name="secondaryLightColor">#7affb4</color>
+    <color name="secondaryDarkColor">#00a856</color>
     <color name="primaryTextColor">#ffffff</color>
-    <color name="secondaryTextColor">#ffffff</color>
-    <color name="backgroundColor">#CC286152</color>
+    <color name="secondaryTextColor">#000000</color>
+    <color name="backgroundColor">#093243</color>
     <!-- Night colors -->
     <color name="nightPrimaryColor">#4C4C4C</color>
     <color name="nightPrimaryLightColor">#484848</color>
