@@ -34,7 +34,9 @@ abstract class BaseViewModel : ViewModel() {
         }
     }
 
-    private fun getNotificationTimeDiff() = 1000L // FIXME: 16.04.2021
+    private fun getNotificationTimeDiff(): Long {
+        return prefRepository.notificationPeriod.toLong() * 60 * 1000
+    }
 
     private fun getNotificationData() = workDataOf(
         NOTIFICATION_PERIOD to prefRepository.notificationPeriod
