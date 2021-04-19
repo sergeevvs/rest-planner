@@ -2,11 +2,17 @@ package com.github.sergeevvs.restplanner.data.repositories
 
 import android.content.Context
 import android.content.Context.MODE_PRIVATE
+import android.util.Log
+import com.github.sergeevvs.restplanner.App
 import com.github.sergeevvs.restplanner.data.Days
+import dagger.hilt.android.qualifiers.ApplicationContext
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class PreferencesRepository(context: Context) {
+@Singleton
+class PreferencesRepository @Inject constructor(@ApplicationContext appContext: Context) {
 
-    private val preferences = context.getSharedPreferences(APP_SETTINGS, MODE_PRIVATE)
+    private val preferences = appContext.getSharedPreferences(APP_SETTINGS, MODE_PRIVATE)
 
     var plannerActive: Boolean
         get() = preferences.getBoolean(PLANNER_ACTIVE, false)
@@ -20,47 +26,12 @@ class PreferencesRepository(context: Context) {
             preferences.edit().putInt(NOTIFICATION_PERIOD, value).apply()
         }
 
-    var monday: Boolean
-        get() = preferences.getBoolean(Days.MONDAY.toString(), false)
-        set(value) {
-            preferences.edit().putBoolean(Days.MONDAY.toString(), value).apply()
-        }
+    fun isDayActive(day: Days) = preferences.getBoolean(day.toString(), false)
 
-    var tuesday: Boolean
-        get() = preferences.getBoolean(Days.TUESDAY.toString(), false)
-        set(value) {
-            preferences.edit().putBoolean(Days.TUESDAY.toString(), value).apply()
-        }
-
-    var wednesday: Boolean
-        get() = preferences.getBoolean(Days.WEDNESDAY.toString(), false)
-        set(value) {
-            preferences.edit().putBoolean(Days.WEDNESDAY.toString(), value).apply()
-        }
-
-    var thursday: Boolean
-        get() = preferences.getBoolean(Days.THURSDAY.toString(), false)
-        set(value) {
-            preferences.edit().putBoolean(Days.THURSDAY.toString(), value).apply()
-        }
-
-    var friday: Boolean
-        get() = preferences.getBoolean(Days.FRIDAY.toString(), false)
-        set(value) {
-            preferences.edit().putBoolean(Days.FRIDAY.toString(), value).apply()
-        }
-
-    var saturday: Boolean
-        get() = preferences.getBoolean(Days.SATURDAY.toString(), false)
-        set(value) {
-            preferences.edit().putBoolean(Days.SATURDAY.toString(), value).apply()
-        }
-
-    var sunday: Boolean
-        get() = preferences.getBoolean(Days.SUNDAY.toString(), false)
-        set(value) {
-            preferences.edit().putBoolean(Days.SUNDAY.toString(), value).apply()
-        }
+    fun setDayActive(day: Days, value: Boolean) {
+        preferences.edit().putBoolean(day.toString(), value).apply()
+        Log.d(App.LOG_TAG, "Set $day activating in $value")
+    }
 
     companion object {
         const val APP_SETTINGS = "app_settings"

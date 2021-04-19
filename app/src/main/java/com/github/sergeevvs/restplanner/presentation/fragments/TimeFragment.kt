@@ -4,17 +4,17 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.activityViewModels
-import com.github.sergeevvs.restplanner.App
 import com.github.sergeevvs.restplanner.databinding.FragmentTimeBinding
-import com.github.sergeevvs.restplanner.presentation.viewmodels.PlannerViewModel
+import com.github.sergeevvs.restplanner.presentation.viewmodels.TimeViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class TimeFragment : BottomSheetDialogFragment() {
 
-    private val viewModel: PlannerViewModel by activityViewModels {
-        (context?.applicationContext as App).viewModelFactory
-    }
+    @Inject
+    lateinit var viewModel: TimeViewModel
     private val binding by lazy { FragmentTimeBinding.inflate(layoutInflater) }
 
     override fun onCreateView(

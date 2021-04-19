@@ -6,19 +6,18 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.CheckBox
 import androidx.core.view.children
-import androidx.fragment.app.activityViewModels
-import com.github.sergeevvs.restplanner.App
 import com.github.sergeevvs.restplanner.data.Days
 import com.github.sergeevvs.restplanner.databinding.FragmentDaysBinding
-import com.github.sergeevvs.restplanner.presentation.viewmodels.PlannerViewModel
+import com.github.sergeevvs.restplanner.presentation.viewmodels.DaysViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class DaysFragment : BottomSheetDialogFragment() {
 
-    private val viewModel: PlannerViewModel by activityViewModels {
-        (context?.applicationContext as App).viewModelFactory
-    }
-
+    @Inject
+    lateinit var viewModel: DaysViewModel
     private val binding by lazy { FragmentDaysBinding.inflate(layoutInflater) }
 
     override fun onCreateView(

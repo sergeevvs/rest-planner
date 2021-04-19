@@ -25,8 +25,6 @@ class NotificationWorker(
         }
         Log.d(App.LOG_TAG, "Sent notification.")
 
-
-
         return Result.success()
     }
 
@@ -45,7 +43,6 @@ class NotificationWorker(
         val intent = Intent(applicationContext, MainActivity::class.java)
         return PendingIntent.getActivity(applicationContext, 0, intent, 0)
     }
-
 
     companion object {
         const val NOTIFICATION_ID = 888
