@@ -20,8 +20,9 @@
         <item name="checkboxStyle">@style/RestPlanner.CheckBox</item>
         <item name="switchStyle">@style/RestPlanner.Switch</item>
         <item name="materialButtonStyle">@style/RestPlanner.Button</item>
+        <item name="editTextStyle">@style/RestPlanner.EditText</item>
         <!-- Custom attrs. -->
-        <item name="colorBottomSheetDialog">@color/primaryColor</item>
+        <item name="colorBottomSheetDialog">@color/backgroundColor</item>
         <item name="colorTextOnBottomSheetDialog">@color/white</item>
     </style>
 </resources>

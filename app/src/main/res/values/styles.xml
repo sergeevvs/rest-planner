@@ -4,6 +4,7 @@
     <style name="RestPlanner.BottomSheetDialog" parent="Theme.MaterialComponents.BottomSheetDialog">
         <item name="bottomSheetStyle">@style/RestPlanner.BottomSheet</item>
         <item name="materialThemeOverlay">@style/Theme.RestPlanner</item>
+<!--        <item name="textInputStyle">@style/RestPlanner.TextInputLayout</item>-->
     </style>
 
     <style name="RestPlanner.BottomSheet" parent="Widget.MaterialComponents.BottomSheet">
@@ -42,5 +43,9 @@
     <style name="RestPlanner.Button" parent="Widget.MaterialComponents.Button">
         <item name="android:backgroundTint">@color/secondaryDarkColor</item>
         <item name="android:textAllCaps">false</item>
+    </style>
+
+    <style name="RestPlanner.EditText" parent="Widget.AppCompat.EditText">
+        <item name="android:textColor">?attr/colorTextOnBottomSheetDialog</item>
     </style>
 </resources>

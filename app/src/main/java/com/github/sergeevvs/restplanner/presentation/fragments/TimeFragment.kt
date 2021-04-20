@@ -29,12 +29,12 @@ class TimeFragment : BottomSheetDialogFragment() {
     }
 
     private fun init() {
-        binding.rgTime.check(viewModel.getRadioButtonByTime())
+        binding.edTimePeriod.setText(viewModel.getTimePeriod())
     }
 
     override fun onStop() {
         super.onStop()
-        viewModel.onSaveNotificationPeriod(resources, binding.rgTime)
+        viewModel.onSaveNotificationPeriod(binding.edTimePeriod.text.toString())
         viewModel.onFragmentStop()
     }
 }
