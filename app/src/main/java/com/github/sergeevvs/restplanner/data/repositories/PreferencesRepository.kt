@@ -4,7 +4,6 @@ import android.content.Context
 import android.content.Context.MODE_PRIVATE
 import android.util.Log
 import com.github.sergeevvs.restplanner.App
-import com.github.sergeevvs.restplanner.data.Days
 import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -14,16 +13,20 @@ class PreferencesRepository @Inject constructor(@ApplicationContext appContext: 
 
     private val preferences = appContext.getSharedPreferences(APP_SETTINGS, MODE_PRIVATE)
 
+    init {
+        preferences.edit().clear().apply()
+    }
+
     var plannerActive: Boolean
         get() = preferences.getBoolean(PLANNER_ACTIVE, false)
         set(value) {
             preferences.edit().putBoolean(PLANNER_ACTIVE, value).apply()
         }
 
-    var notificationPeriod: Int
-        get() = preferences.getInt(NOTIFICATION_PERIOD, 0)
+    var notificationPeriod: Long
+        get() = preferences.getLong(NOTIFICATION_PERIOD, 0L)
         set(value) {
-            preferences.edit().putInt(NOTIFICATION_PERIOD, value).apply()
+            preferences.edit().putLong(NOTIFICATION_PERIOD, value).apply()
         }
 
     var startTime: Long
@@ -38,9 +41,9 @@ class PreferencesRepository @Inject constructor(@ApplicationContext appContext: 
             preferences.edit().putLong(END_TIME, value).apply()
         }
 
-    fun isDayActive(day: Days) = preferences.getBoolean(day.toString(), false)
+    fun isDayActive(day: Int) = preferences.getBoolean(day.toString(), false)
 
-    fun setDayActive(day: Days, value: Boolean) {
+    fun setDayActive(day: Int, value: Boolean) {
         preferences.edit().putBoolean(day.toString(), value).apply()
         Log.d(App.LOG_TAG, "Set $day activating in $value")
     }

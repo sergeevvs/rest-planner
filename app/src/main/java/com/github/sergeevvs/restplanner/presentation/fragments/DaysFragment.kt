@@ -6,11 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.CheckBox
 import androidx.core.view.children
-import com.github.sergeevvs.restplanner.data.Days
 import com.github.sergeevvs.restplanner.databinding.FragmentDaysBinding
 import com.github.sergeevvs.restplanner.presentation.viewmodels.DaysViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import dagger.hilt.android.AndroidEntryPoint
+import java.util.*
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -32,13 +32,13 @@ class DaysFragment : BottomSheetDialogFragment() {
     }
 
     private fun init() {
-        binding.cbMonday.isChecked = viewModel.isDayActive(Days.MONDAY)
-        binding.cbTuesday.isChecked = viewModel.isDayActive(Days.TUESDAY)
-        binding.cbWednesday.isChecked = viewModel.isDayActive(Days.WEDNESDAY)
-        binding.cbThursday.isChecked = viewModel.isDayActive(Days.THURSDAY)
-        binding.cbFriday.isChecked = viewModel.isDayActive(Days.FRIDAY)
-        binding.cbSaturday.isChecked = viewModel.isDayActive(Days.SATURDAY)
-        binding.cbSunday.isChecked = viewModel.isDayActive(Days.SUNDAY)
+        binding.cbSunday.isChecked = viewModel.isDayActive(Calendar.SUNDAY)
+        binding.cbMonday.isChecked = viewModel.isDayActive(Calendar.MONDAY)
+        binding.cbTuesday.isChecked = viewModel.isDayActive(Calendar.TUESDAY)
+        binding.cbWednesday.isChecked = viewModel.isDayActive(Calendar.WEDNESDAY)
+        binding.cbThursday.isChecked = viewModel.isDayActive(Calendar.THURSDAY)
+        binding.cbFriday.isChecked = viewModel.isDayActive(Calendar.FRIDAY)
+        binding.cbSaturday.isChecked = viewModel.isDayActive(Calendar.SATURDAY)
     }
 
     override fun onStop() {
@@ -49,13 +49,13 @@ class DaysFragment : BottomSheetDialogFragment() {
 
     private fun saveDayActivating(cb: CheckBox) {
         when (cb) {
-            binding.cbMonday -> viewModel.onSaveDayActivating(Days.MONDAY, cb.isChecked)
-            binding.cbTuesday -> viewModel.onSaveDayActivating(Days.TUESDAY, cb.isChecked)
-            binding.cbWednesday -> viewModel.onSaveDayActivating(Days.WEDNESDAY, cb.isChecked)
-            binding.cbThursday -> viewModel.onSaveDayActivating(Days.THURSDAY, cb.isChecked)
-            binding.cbFriday -> viewModel.onSaveDayActivating(Days.FRIDAY, cb.isChecked)
-            binding.cbSaturday -> viewModel.onSaveDayActivating(Days.SATURDAY, cb.isChecked)
-            binding.cbSunday -> viewModel.onSaveDayActivating(Days.SUNDAY, cb.isChecked)
+            binding.cbSunday -> viewModel.onSaveDayActivating(Calendar.SUNDAY, cb.isChecked)
+            binding.cbMonday -> viewModel.onSaveDayActivating(Calendar.MONDAY, cb.isChecked)
+            binding.cbTuesday -> viewModel.onSaveDayActivating(Calendar.TUESDAY, cb.isChecked)
+            binding.cbWednesday -> viewModel.onSaveDayActivating(Calendar.WEDNESDAY, cb.isChecked)
+            binding.cbThursday -> viewModel.onSaveDayActivating(Calendar.THURSDAY, cb.isChecked)
+            binding.cbFriday -> viewModel.onSaveDayActivating(Calendar.FRIDAY, cb.isChecked)
+            binding.cbSaturday -> viewModel.onSaveDayActivating(Calendar.SATURDAY, cb.isChecked)
         }
     }
 }

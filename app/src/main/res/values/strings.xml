@@ -24,4 +24,6 @@
     <string name="is_rest_planner_checked">Is rest planner checked</string>
     <string name="channel_name">Rest planner notification channel</string>
     <string name="channel_description">For periodic rest notifications</string>
+    <string name="tv_time_period_prefix">Каждые</string>
+    <string name="tv_time_period_postfix">минут</string>
 </resources>

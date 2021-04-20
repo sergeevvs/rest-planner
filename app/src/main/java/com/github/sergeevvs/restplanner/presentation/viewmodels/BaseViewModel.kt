@@ -7,6 +7,7 @@ import androidx.work.WorkManager
 import androidx.work.workDataOf
 import com.github.sergeevvs.restplanner.data.NotificationWorker
 import com.github.sergeevvs.restplanner.data.repositories.PreferencesRepository
+import java.util.*
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
@@ -39,7 +40,27 @@ abstract class BaseViewModel : ViewModel() {
      * обеденное время (если оно включено).
      * */
     private fun getNotificationTimeDiff(): Long {
-        val result: Long = prefRepository.notificationPeriod.toLong() * 60 * 1000
+        val period = prefRepository.notificationPeriod
+        var result = period
+        val currentTime = Calendar.getInstance().timeInMillis
+
+
+        // test times
+        val testStartTime = Calendar.getInstance().apply {
+            set(Calendar.HOUR_OF_DAY, 10)
+            set(Calendar.MINUTE, 0)
+            set(Calendar.SECOND, 0)
+        }.timeInMillis
+        val testEndTime = Calendar.getInstance().apply {
+            set(Calendar.HOUR_OF_DAY, 20)
+            set(Calendar.MINUTE, 0)
+            set(Calendar.SECOND, 0)
+        }.timeInMillis
+
+        if (currentTime > testStartTime && currentTime + period < testEndTime) {
+            result = period - (currentTime % period)
+//            if (currentTime.days)
+        }
 
         return result
     }
