@@ -13,9 +13,9 @@ class PreferencesRepository @Inject constructor(@ApplicationContext appContext: 
 
     private val preferences = appContext.getSharedPreferences(APP_SETTINGS, MODE_PRIVATE)
 
-    init {
+    /*init {
         preferences.edit().clear().apply()
-    }
+    }*/
 
     var plannerActive: Boolean
         get() = preferences.getBoolean(PLANNER_ACTIVE, false)
@@ -24,9 +24,10 @@ class PreferencesRepository @Inject constructor(@ApplicationContext appContext: 
         }
 
     var notificationPeriod: Long
-        get() = preferences.getLong(NOTIFICATION_PERIOD, 0L)
+        get() = preferences.getLong(NOTIFICATION_PERIOD, 600000L) // 10 minutes by default
         set(value) {
-            preferences.edit().putLong(NOTIFICATION_PERIOD, value).apply()
+            if (value >= 600000L)
+                preferences.edit().putLong(NOTIFICATION_PERIOD, value).apply()
         }
 
     var startTime: Long

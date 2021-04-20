@@ -38,31 +38,41 @@ abstract class BaseViewModel : ViewModel() {
     /**
      * Метод высчитывает время до следующей нотификации, учитывая дни и время активности планировщика,
      * обеденное время (если оно включено).
+     *
+     * ЕСЛИ текущий день активен И
+     * текущее время >= времени начала рабочего дня И
+     * текущее время + период нотификации < времени конца рабочего дня
+     * ТО -> возвращаем период нотификации, с учетом разницы с текущим временем
+     * (Например сейчас 10:45, а запустить надо в 11:00, при периоде в 60 минут)
+     * ИНАЧЕ -> высчитываем время старта слудующего дня
      * */
     private fun getNotificationTimeDiff(): Long {
+        val calendar = Calendar.getInstance()
         val period = prefRepository.notificationPeriod
-        var result = period
-        val currentTime = Calendar.getInstance().timeInMillis
+        val currentTime = calendar.timeInMillis
 
 
         // test times
-        val testStartTime = Calendar.getInstance().apply {
+        val testStartTime = calendar.apply {
             set(Calendar.HOUR_OF_DAY, 10)
             set(Calendar.MINUTE, 0)
             set(Calendar.SECOND, 0)
         }.timeInMillis
-        val testEndTime = Calendar.getInstance().apply {
-            set(Calendar.HOUR_OF_DAY, 20)
-            set(Calendar.MINUTE, 0)
+        val testEndTime = calendar.apply {
+            set(Calendar.HOUR_OF_DAY, 17)
+            set(Calendar.MINUTE, 53)
             set(Calendar.SECOND, 0)
         }.timeInMillis
 
-        if (currentTime > testStartTime && currentTime + period < testEndTime) {
-            result = period - (currentTime % period)
-//            if (currentTime.days)
-        }
 
-        return result
+        return if (prefRepository.isDayActive(calendar[Calendar.DAY_OF_WEEK]) &&
+            currentTime >= testStartTime &&
+            currentTime + period < testEndTime
+        ) {
+            period - (currentTime % period)
+        } else {
+            (testStartTime - currentTime) + (24 * 60 * 60 * 1000)
+        }
     }
 
     private fun getNotificationData() = workDataOf(
