@@ -3,7 +3,7 @@ package com.github.sergeevvs.restplanner.data.repositories
 import android.content.Context
 import android.content.Context.MODE_PRIVATE
 import android.util.Log
-import com.github.sergeevvs.restplanner.App
+import com.github.sergeevvs.restplanner.data.*
 import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -46,14 +46,6 @@ class PreferencesRepository @Inject constructor(@ApplicationContext appContext: 
 
     fun setDayActive(day: Int, value: Boolean) {
         preferences.edit().putBoolean(day.toString(), value).apply()
-        Log.d(App.LOG_TAG, "Set $day activating in $value")
-    }
-
-    companion object {
-        const val APP_SETTINGS = "app_settings"
-        const val PLANNER_ACTIVE = "planner_active"
-        const val NOTIFICATION_PERIOD = "notification_period"
-        const val START_TIME = "start_time"
-        const val END_TIME = "end_time"
+        Log.d(LOG_TAG, "Set $day activating in $value")
     }
 }

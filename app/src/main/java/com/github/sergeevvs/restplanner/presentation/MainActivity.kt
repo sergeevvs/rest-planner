@@ -7,8 +7,8 @@ import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.github.sergeevvs.restplanner.App
 import com.github.sergeevvs.restplanner.R
+import com.github.sergeevvs.restplanner.data.CHANNEL_ID
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -17,6 +17,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
         createNotificationChannel()
     }
 
@@ -25,7 +26,7 @@ class MainActivity : AppCompatActivity() {
             val name = getString(R.string.channel_name)
             val description = getString(R.string.channel_description)
             val importance = NotificationManager.IMPORTANCE_HIGH
-            val channel = NotificationChannel(App.CHANNEL_ID, name, importance).apply {
+            val channel = NotificationChannel(CHANNEL_ID, name, importance).apply {
                 this.description = description
                 enableVibration(true)
                 vibrationPattern = longArrayOf(0, 200, 200, 200)

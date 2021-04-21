@@ -1,7 +1,7 @@
 package com.github.sergeevvs.restplanner.presentation.viewmodels
 
 import android.util.Log
-import com.github.sergeevvs.restplanner.App
+import com.github.sergeevvs.restplanner.data.LOG_TAG
 import javax.inject.Inject
 
 class MainViewModel @Inject constructor() : BaseViewModel() {
@@ -11,6 +11,6 @@ class MainViewModel @Inject constructor() : BaseViewModel() {
         set(value) {
             prefRepository.plannerActive = value
             updateNotificationManager()
-            Log.d(App.LOG_TAG, "Change planner active on $value")
+            Log.d(LOG_TAG, "Change planner active on $value")
         }
 }

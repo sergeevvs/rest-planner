@@ -5,6 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.github.sergeevvs.restplanner.data.DAYS_FRAGMENT_TAG
+import com.github.sergeevvs.restplanner.data.TIME_FRAGMENT_TAG
 import com.github.sergeevvs.restplanner.databinding.FragmentMainBinding
 import com.github.sergeevvs.restplanner.presentation.viewmodels.MainViewModel
 import com.google.android.material.switchmaterial.SwitchMaterial
@@ -52,10 +54,5 @@ class MainFragment : Fragment() {
 
     private fun onBtnDaysClicked() {
         DaysFragment().show(parentFragmentManager, DAYS_FRAGMENT_TAG)
-    }
-
-    companion object {
-        const val TIME_FRAGMENT_TAG = "time_fragment"
-        const val DAYS_FRAGMENT_TAG = "days_fragment"
     }
 }

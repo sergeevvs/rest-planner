@@ -8,11 +8,12 @@ import android.provider.Settings
 import android.util.Log
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
-import androidx.work.Worker
-import androidx.work.WorkerParameters
-import com.github.sergeevvs.restplanner.App
+import androidx.work.*
 import com.github.sergeevvs.restplanner.R
+import com.github.sergeevvs.restplanner.data.repositories.PreferencesRepository
 import com.github.sergeevvs.restplanner.presentation.MainActivity
+import java.util.*
+import java.util.concurrent.TimeUnit
 
 class NotificationWorker(
     appContext: Context,
@@ -20,16 +21,75 @@ class NotificationWorker(
 ) : Worker(appContext, workerParams) {
 
     override fun doWork(): Result {
-        with(NotificationManagerCompat.from(applicationContext)) {
-            notify(NOTIFICATION_ID, createNotification().build())
+
+        val wm = WorkManager.getInstance(applicationContext)
+        val prefRepository = PreferencesRepository(applicationContext)
+
+        if (inputData.getBoolean(EXECUTE_NOTIFICATION, false)) {
+            with(NotificationManagerCompat.from(applicationContext)) {
+                notify(NOTIFICATION_ID, createNotification().build())
+            }
+            Log.d(LOG_TAG, "Notification sent.")
         }
-        Log.d(App.LOG_TAG, "Sent notification.")
+
+        wm.enqueueUniqueWork(
+            REST_WORK_NAME,
+            ExistingWorkPolicy.REPLACE,
+            OneTimeWorkRequestBuilder<NotificationWorker>()
+                .setInitialDelay(getNotificationTimeDiff(prefRepository), TimeUnit.MILLISECONDS)
+                .setInputData(
+                    workDataOf(
+                        EXECUTE_NOTIFICATION to true
+                    )
+                )
+                .build()
+        )
+        Log.d(LOG_TAG, "A new deferred notification handler has been launched.")
 
         return Result.success()
     }
 
+    /**
+     * Метод высчитывает время до следующей нотификации, учитывая дни и время активности планировщика,
+     * обеденное время (если оно включено).
+     *
+     * ЕСЛИ текущий день активен И
+     * текущее время >= времени начала рабочего дня И
+     * текущее время + период нотификации < времени конца рабочего дня
+     * ТО -> возвращаем период нотификации, с учетом разницы с текущим временем
+     * (Например сейчас 10:45, а запустить надо в 11:00, при периоде в 60 минут)
+     * ИНАЧЕ -> высчитываем время старта слудующего дня
+     * */
+    private fun getNotificationTimeDiff(prefRepository: PreferencesRepository): Long {
+        val calendar = Calendar.getInstance()
+        val period = prefRepository.notificationPeriod
+        val currentTime = calendar.timeInMillis
+
+        // test times
+        val testStartTime = calendar.apply {
+            set(Calendar.HOUR_OF_DAY, 10)
+            set(Calendar.MINUTE, 0)
+            set(Calendar.SECOND, 0)
+        }.timeInMillis
+        val testEndTime = calendar.apply {
+            set(Calendar.HOUR_OF_DAY, 18)
+            set(Calendar.MINUTE, 0)
+            set(Calendar.SECOND, 0)
+        }.timeInMillis
+
+
+        return if (prefRepository.isDayActive(calendar[Calendar.DAY_OF_WEEK]) &&
+            currentTime >= testStartTime &&
+            currentTime + period < testEndTime
+        ) {
+            period - (currentTime % period)
+        } else {
+            (testStartTime - currentTime) + (24 * 60 * 60 * 1000)
+        }
+    }
+
     private fun createNotification() =
-        NotificationCompat.Builder(applicationContext, App.CHANNEL_ID)
+        NotificationCompat.Builder(applicationContext, CHANNEL_ID)
             .setSmallIcon(R.mipmap.ic_launcher_round)
             .setContentTitle(applicationContext.resources.getString(R.string.notification_title))
             .setPriority(NotificationCompat.PRIORITY_HIGH)
@@ -42,9 +102,5 @@ class NotificationWorker(
     private fun createPendingIntent(): PendingIntent {
         val intent = Intent(applicationContext, MainActivity::class.java)
         return PendingIntent.getActivity(applicationContext, 0, intent, 0)
-    }
-
-    companion object {
-        const val NOTIFICATION_ID = 888
     }
 }
