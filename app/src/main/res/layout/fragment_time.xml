@@ -1,20 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="match_parent"
     android:layout_gravity="center_horizontal"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
     android:padding="@dimen/layout_padding">
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/tv_choose_period"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:gravity="center"
+        android:paddingBottom="20dp"
         android:text="@string/rest_time_period"
         android:textColor="?attr/colorTextOnBottomSheetDialog"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/ll_time_period"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_choose_period">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tv_time_period_prefix"
+            android:textColor="?attr/colorTextOnBottomSheetDialog"
+            android:textSize="@dimen/text_size" />
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/ed_time_period"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/margin"
+            android:gravity="center"
+            android:inputType="number"
+            android:lines="1"
+            android:maxLength="3"
+            android:textColor="?attr/colorSecondary"
+            android:textSize="@dimen/title_text_size"
+            tools:text="60" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tv_time_period_postfix"
+            android:textColor="?attr/colorTextOnBottomSheetDialog"
+            android:textSize="@dimen/text_size" />
+    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/ll_active_period"
@@ -23,42 +65,48 @@
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_choose_period"></LinearLayout>
+        app:layout_constraintTop_toBottomOf="@id/ll_time_period">
 
-    <LinearLayout
-        android:id="@+id/ll_time_period"
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/start"
+            android:textColor="?attr/colorTextOnBottomSheetDialog"
+            android:textSize="@dimen/text_size" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_start_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin"
+            android:clickable="true"
+            android:focusable="true"
+            android:textColor="?attr/colorSecondary"
+            android:textSize="@dimen/title_text_size" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:text="@string/end"
+            android:textColor="?attr/colorTextOnBottomSheetDialog"
+            android:textSize="@dimen/text_size" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_end_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin"
+            android:clickable="true"
+            android:focusable="true"
+            android:textColor="?attr/colorSecondary"
+            android:textSize="@dimen/title_text_size" />
+    </LinearLayout>
+
+    <Space
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:focusable="true"
-        android:focusableInTouchMode="true"
-        android:gravity="center"
-        android:orientation="horizontal"
+        android:layout_height="150dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/ll_active_period">
-
-        <com.google.android.material.textview.MaterialTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/tv_time_period_prefix"
-            android:textColor="?attr/colorTextOnBottomSheetDialog" />
-
-        <EditText
-            android:id="@+id/ed_time_period"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/margin"
-            android:ems="2"
-            android:gravity="center"
-            android:importantForAutofill="no"
-            android:inputType="number"
-            android:lines="1"
-            android:maxLength="3" />
-
-        <com.google.android.material.textview.MaterialTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/tv_time_period_postfix"
-            android:textColor="?attr/colorTextOnBottomSheetDialog" />
-    </LinearLayout>
+        app:layout_constraintTop_toBottomOf="@id/ll_active_period" />
 </androidx.constraintlayout.widget.ConstraintLayout>

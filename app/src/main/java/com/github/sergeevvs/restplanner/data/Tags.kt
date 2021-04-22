@@ -10,5 +10,7 @@ const val LOG_TAG = "rest_planner_log"
 const val CHANNEL_ID = "rest_planner_channel_id"
 const val TIME_FRAGMENT_TAG = "time_fragment"
 const val DAYS_FRAGMENT_TAG = "days_fragment"
+const val START_TIME_PICKER_TAG = "start_time_picker"
+const val END_TIME_PICKER_TAG = "end_time_picker"
 const val EXECUTE_NOTIFICATION = "execute_notification"
 const val NOTIFICATION_ID = 888
