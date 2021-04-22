@@ -80,7 +80,7 @@ class NotificationWorker(
         ) {
             period - (currentTime % period)
         } else {
-            (startTime - currentTime) + (24 * 60 * 60 * 1000)
+            startTime - currentTime + period + (24 * 60 * 60 * 1000)
         }
     }
 
