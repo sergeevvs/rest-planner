@@ -80,13 +80,14 @@ class NotificationWorker(
         }
 
         val startTime = calendar.timeInMillis + prefRepository.startTime
-        val endTime = calendar.timeInMillis + prefRepository.endTime
+        var endTime = calendar.timeInMillis + prefRepository.endTime
+        if (endTime < startTime) endTime += 24 * 60 * 60 * 1000
 
         return if (prefRepository.isDayActive(calendar[Calendar.DAY_OF_WEEK]) &&
             currentTime >= startTime &&
             currentTime + period < endTime
         ) {
-            period - (currentTime % period)
+            period - ((currentTime - startTime) % period)
         } else if (prefRepository.isDayActive(calendar[Calendar.DAY_OF_WEEK]) &&
             currentTime < startTime
         ) {
