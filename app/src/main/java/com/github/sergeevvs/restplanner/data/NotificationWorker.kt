@@ -24,8 +24,11 @@ class NotificationWorker(
 
         val wm = WorkManager.getInstance(applicationContext)
         val prefRepository = PreferencesRepository(applicationContext)
+        val calendar = Calendar.getInstance()
 
-        if (inputData.getBoolean(EXECUTE_NOTIFICATION, false)) {
+        if (inputData.getBoolean(EXECUTE_NOTIFICATION, false) &&
+            prefRepository.isDayActive(calendar[Calendar.DAY_OF_WEEK])
+        ) {
             with(NotificationManagerCompat.from(applicationContext)) {
                 notify(NOTIFICATION_ID, createNotification().build())
             }
@@ -36,7 +39,10 @@ class NotificationWorker(
             REST_WORK_NAME,
             ExistingWorkPolicy.REPLACE,
             OneTimeWorkRequestBuilder<NotificationWorker>()
-                .setInitialDelay(getNotificationTimeDiff(prefRepository), TimeUnit.MILLISECONDS)
+                .setInitialDelay(
+                    getNotificationTimeDiff(prefRepository, calendar),
+                    TimeUnit.MILLISECONDS
+                )
                 .setInputData(
                     workDataOf(
                         EXECUTE_NOTIFICATION to true
@@ -58,10 +64,12 @@ class NotificationWorker(
      * текущее время + период нотификации < времени конца рабочего дня
      * ТО -> возвращаем период нотификации, с учетом разницы с текущим временем
      * (Например сейчас 10:45, а запустить надо в 11:00, при периоде в 60 минут)
-     * ИНАЧЕ -> высчитываем время старта слудующего дня
+     * ИНАЧЕ -> высчитываем время старта слудующего дня + период нотификации
      * */
-    private fun getNotificationTimeDiff(prefRepository: PreferencesRepository): Long {
-        val calendar = Calendar.getInstance()
+    private fun getNotificationTimeDiff(
+        prefRepository: PreferencesRepository,
+        calendar: Calendar
+    ): Long {
         val period = prefRepository.notificationPeriod
         val currentTime = calendar.timeInMillis
 
@@ -79,6 +87,10 @@ class NotificationWorker(
             currentTime + period < endTime
         ) {
             period - (currentTime % period)
+        } else if (prefRepository.isDayActive(calendar[Calendar.DAY_OF_WEEK]) &&
+            currentTime < startTime
+        ) {
+            startTime - currentTime + period
         } else {
             startTime - currentTime + period + (24 * 60 * 60 * 1000)
         }
