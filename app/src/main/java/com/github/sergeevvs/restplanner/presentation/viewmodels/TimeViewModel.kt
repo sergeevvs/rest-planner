@@ -9,6 +9,7 @@ class TimeViewModel @Inject constructor() : BaseViewModel() {
         prefRepository.notificationPeriod = (timePeriod.toLongOrNull() ?: 0) * 60 * 1000
     }
 
+    // return Pair value of Hour - Minute
     fun getStartTime() = prefRepository.startTime.let {
         (it / 1000 / 60 / 60) to (it / 1000 / 60 % 60)
     }
@@ -17,6 +18,7 @@ class TimeViewModel @Inject constructor() : BaseViewModel() {
         prefRepository.startTime = ((hour * 60 * 60 * 1000) + (minute * 60 * 1000))
     }
 
+    // return Pair value of Hour - Minute
     fun getEndTime() = prefRepository.endTime.let {
         (it / 1000 / 60 / 60) to (it / 1000 / 60 % 60)
     }

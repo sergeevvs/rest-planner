@@ -7,7 +7,7 @@
     android:layout_gravity="center_horizontal"
     android:focusable="true"
     android:focusableInTouchMode="true"
-    android:padding="@dimen/layout_padding">
+    android:paddingTop="@dimen/layout_padding">
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/tv_choose_period"
@@ -62,45 +62,66 @@
         android:id="@+id/ll_active_period"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:gravity="center"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/ll_time_period">
 
-        <com.google.android.material.textview.MaterialTextView
+        <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/start"
-            android:textColor="?attr/colorTextOnBottomSheetDialog"
-            android:textSize="@dimen/text_size" />
+            android:layout_height="40dp"
+            android:background="@drawable/picker_background"
+            android:gravity="center"
+            android:orientation="horizontal">
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/tv_start_time"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin"
-            android:clickable="true"
-            android:focusable="true"
-            android:textColor="?attr/colorSecondary"
-            android:textSize="@dimen/title_text_size" />
+            <NumberPicker
+                android:id="@+id/start_time_hour_picker"
+                android:layout_width="30dp"
+                android:layout_height="50dp" />
 
-        <com.google.android.material.textview.MaterialTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="40dp"
-            android:text="@string/end"
-            android:textColor="?attr/colorTextOnBottomSheetDialog"
-            android:textSize="@dimen/text_size" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:text=":"
+                android:textColor="@color/white" />
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/tv_end_time"
+            <NumberPicker
+                android:id="@+id/start_time_minute_picker"
+                android:layout_width="30dp"
+                android:layout_height="50dp" />
+        </LinearLayout>
+
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin"
-            android:clickable="true"
-            android:focusable="true"
-            android:textColor="?attr/colorSecondary"
-            android:textSize="@dimen/title_text_size" />
+            android:text="  -  "
+            android:textColor="@color/white" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:background="@drawable/picker_background"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <NumberPicker
+                android:id="@+id/end_time_hour_picker"
+                android:layout_width="30dp"
+                android:layout_height="50dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=":"
+                android:textColor="@color/white" />
+
+            <NumberPicker
+                android:id="@+id/end_time_minute_picker"
+                android:layout_width="30dp"
+                android:layout_height="50dp" />
+        </LinearLayout>
     </LinearLayout>
 
     <Space

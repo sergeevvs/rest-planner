@@ -11,6 +11,16 @@ import javax.inject.Singleton
 @Singleton
 class PreferencesRepository @Inject constructor(@ApplicationContext appContext: Context) {
 
+    companion object {
+        fun timeToMillis(hour: Int, minute: Int): Long {
+            return ((hour * 60 * 60 * 1000) + (minute * 60 * 1000)).toLong()
+        }
+
+        fun millisToTime(millis: Long): Pair<Int, Int> {
+            return (millis / 1000 / 60 / 60).toInt() to (millis / 1000 / 60 % 60).toInt()
+        }
+    }
+
     private val preferences = appContext.getSharedPreferences(APP_SETTINGS, MODE_PRIVATE)
 
     /*init {
@@ -30,16 +40,28 @@ class PreferencesRepository @Inject constructor(@ApplicationContext appContext: 
                 preferences.edit().putLong(NOTIFICATION_PERIOD, value).apply()
         }
 
-    var startTime: Long
-        get() = preferences.getLong(START_TIME, 0L)
+    var startHour: Int
+        get() = preferences.getInt(START_HOUR, 0)
         set(value) {
-            preferences.edit().putLong(START_TIME, value).apply()
+            preferences.edit().putInt(START_HOUR, value).apply()
         }
 
-    var endTime: Long
-        get() = preferences.getLong(END_TIME, 0L)
+    var startMinute: Int
+        get() = preferences.getInt(START_MINUTE, 0)
         set(value) {
-            preferences.edit().putLong(END_TIME, value).apply()
+            preferences.edit().putInt(START_MINUTE, value).apply()
+        }
+
+    var endHour: Int
+        get() = preferences.getInt(END_HOUR, 0)
+        set(value) {
+            preferences.edit().putInt(END_HOUR, value).apply()
+        }
+
+    var endMinute: Int
+        get() = preferences.getInt(END_MINUTE, 0)
+        set(value) {
+            preferences.edit().putInt(END_MINUTE, value).apply()
         }
 
     fun isDayActive(day: Int) = preferences.getBoolean(day.toString(), false)
