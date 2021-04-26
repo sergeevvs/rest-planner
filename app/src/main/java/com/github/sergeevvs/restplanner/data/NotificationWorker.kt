@@ -67,10 +67,10 @@ class NotificationWorker(
      * ИНАЧЕ -> высчитываем время старта слудующего дня + период нотификации
      * */
     private fun getNotificationTimeDiff(
-        prefRepository: PreferencesRepository,
+        prefs: PreferencesRepository,
         calendar: Calendar
     ): Long {
-        val period = prefRepository.notificationPeriod
+        val period = prefs.timeToMillis(minute = prefs.notificationPeriod)
         val currentTime = calendar.timeInMillis
 
         calendar.apply {
@@ -79,16 +79,17 @@ class NotificationWorker(
             set(Calendar.SECOND, 0)
         }
 
-        val startTime = calendar.timeInMillis + prefRepository.startTime
-        var endTime = calendar.timeInMillis + prefRepository.endTime
+        val startTime =
+            calendar.timeInMillis + prefs.timeToMillis(prefs.startHour, prefs.startMinute)
+        var endTime = calendar.timeInMillis + prefs.timeToMillis(prefs.endHour, prefs.endMinute)
         if (endTime < startTime) endTime += 24 * 60 * 60 * 1000
 
-        return if (prefRepository.isDayActive(calendar[Calendar.DAY_OF_WEEK]) &&
+        return if (prefs.isDayActive(calendar[Calendar.DAY_OF_WEEK]) &&
             currentTime >= startTime &&
             currentTime + period < endTime
         ) {
             period - ((currentTime - startTime) % period)
-        } else if (prefRepository.isDayActive(calendar[Calendar.DAY_OF_WEEK]) &&
+        } else if (prefs.isDayActive(calendar[Calendar.DAY_OF_WEEK]) &&
             currentTime < startTime
         ) {
             startTime - currentTime + period

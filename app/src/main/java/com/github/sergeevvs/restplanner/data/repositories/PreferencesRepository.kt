@@ -11,21 +11,11 @@ import javax.inject.Singleton
 @Singleton
 class PreferencesRepository @Inject constructor(@ApplicationContext appContext: Context) {
 
-    companion object {
-        fun timeToMillis(hour: Int, minute: Int): Long {
-            return ((hour * 60 * 60 * 1000) + (minute * 60 * 1000)).toLong()
-        }
-
-        fun millisToTime(millis: Long): Pair<Int, Int> {
-            return (millis / 1000 / 60 / 60).toInt() to (millis / 1000 / 60 % 60).toInt()
-        }
-    }
-
     private val preferences = appContext.getSharedPreferences(APP_SETTINGS, MODE_PRIVATE)
 
-    /*init {
+    init {
         preferences.edit().clear().apply()
-    }*/
+    }
 
     var plannerActive: Boolean
         get() = preferences.getBoolean(PLANNER_ACTIVE, false)
@@ -33,11 +23,11 @@ class PreferencesRepository @Inject constructor(@ApplicationContext appContext: 
             preferences.edit().putBoolean(PLANNER_ACTIVE, value).apply()
         }
 
-    var notificationPeriod: Long
-        get() = preferences.getLong(NOTIFICATION_PERIOD, 600000L) // 10 minutes by default
+    var notificationPeriod: Int
+        get() = preferences.getInt(NOTIFICATION_PERIOD, 10)
         set(value) {
-            if (value >= 600000L)
-                preferences.edit().putLong(NOTIFICATION_PERIOD, value).apply()
+            if (value >= 10)
+                preferences.edit().putInt(NOTIFICATION_PERIOD, value).apply()
         }
 
     var startHour: Int
@@ -70,4 +60,10 @@ class PreferencesRepository @Inject constructor(@ApplicationContext appContext: 
         preferences.edit().putBoolean(day.toString(), value).apply()
         Log.d(LOG_TAG, "Set $day activating in $value")
     }
+
+    fun timeToMillis(hour: Int = 0, minute: Int = 0) =
+        ((hour * 60 * 60 * 1000) + (minute * 60 * 1000)).toLong()
+
+    fun millisToTime(millis: Long) =
+        (millis / 1000 / 60 / 60).toInt() to (millis / 1000 / 60 % 60).toInt()
 }

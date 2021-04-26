@@ -37,25 +37,12 @@
             android:textColor="?attr/colorTextOnBottomSheetDialog"
             android:textSize="@dimen/text_size" />
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/ed_time_period"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/margin"
-            android:gravity="center"
-            android:inputType="number"
-            android:lines="1"
-            android:maxLength="3"
-            android:textColor="?attr/colorSecondary"
-            android:textSize="@dimen/title_text_size"
-            tools:text="60" />
-
-        <com.google.android.material.textview.MaterialTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/tv_time_period_postfix"
-            android:textColor="?attr/colorTextOnBottomSheetDialog"
-            android:textSize="@dimen/text_size" />
+        <NumberPicker
+            android:layout_marginStart="20dp"
+            android:id="@+id/time_period"
+            android:layout_width="30dp"
+            android:layout_height="50dp"
+            android:background="@drawable/picker_background" />
     </LinearLayout>
 
     <LinearLayout

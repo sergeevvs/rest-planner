@@ -4,26 +4,33 @@ import javax.inject.Inject
 
 class TimeViewModel @Inject constructor() : BaseViewModel() {
 
-    fun getTimePeriod() = (prefRepository.notificationPeriod / 60 / 1000).toString()
-    fun setNotificationPeriod(timePeriod: String) {
-        prefRepository.notificationPeriod = (timePeriod.toLongOrNull() ?: 0) * 60 * 1000
-    }
+    var notificationPeriod: Int
+        get() = prefRepository.notificationPeriod
+        set(value) {
+            prefRepository.notificationPeriod = value
+        }
 
-    // return Pair value of Hour - Minute
-    fun getStartTime() = prefRepository.startTime.let {
-        (it / 1000 / 60 / 60) to (it / 1000 / 60 % 60)
-    }
+    var startHour: Int
+        get() = prefRepository.startHour
+        set(value) {
+            prefRepository.startHour = value
+        }
 
-    fun setStartTime(hour: Long, minute: Long) {
-        prefRepository.startTime = ((hour * 60 * 60 * 1000) + (minute * 60 * 1000))
-    }
+    var startMinute: Int
+        get() = prefRepository.startMinute
+        set(value) {
+            prefRepository.startMinute = value
+        }
 
-    // return Pair value of Hour - Minute
-    fun getEndTime() = prefRepository.endTime.let {
-        (it / 1000 / 60 / 60) to (it / 1000 / 60 % 60)
-    }
+    var endHour: Int
+        get() = prefRepository.endHour
+        set(value) {
+            prefRepository.endHour = value
+        }
 
-    fun setEndTime(hour: Long, minute: Long) {
-        prefRepository.endTime = (hour * 60 * 60 * 1000) + (minute * 60 * 1000)
-    }
+    var endMinute: Int
+        get() = prefRepository.endMinute
+        set(value) {
+            prefRepository.endMinute = value
+        }
 }
