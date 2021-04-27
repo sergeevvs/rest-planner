@@ -1,15 +1,17 @@
 package com.github.sergeevvs.restplanner.presentation.fragments
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.github.sergeevvs.restplanner.data.LOG_TAG
+import android.widget.NumberPicker
 import com.github.sergeevvs.restplanner.databinding.FragmentTimeBinding
 import com.github.sergeevvs.restplanner.presentation.viewmodels.TimeViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -33,13 +35,18 @@ class TimeFragment : BottomSheetDialogFragment() {
     private fun init() {
 
         binding.timePeriod.apply {
-            minValue = 10
-            maxValue = 90
+            minValue = 1
+            maxValue = 12
+            displayedValues = (minValue..maxValue).map { (it * 10).toString() }.toTypedArray()
             value = viewModel.notificationPeriod
-            /*seton { view, scrollState ->
-//                viewModel.notificationPeriod = newVal
-                Log.d(LOG_TAG, "spinner listener ${view.value}")
-            }*/
+            setOnScrollListener { _, scrollState ->
+                if (scrollState == NumberPicker.OnScrollListener.SCROLL_STATE_IDLE) {
+                    GlobalScope.launch {
+                        delay(1000L)
+                        viewModel.notificationPeriod = value
+                    }
+                }
+            }
         }
 
         binding.startTimeHourPicker.apply {
@@ -47,8 +54,13 @@ class TimeFragment : BottomSheetDialogFragment() {
             maxValue = 23
             value = viewModel.startHour
             setFormatter { String.format("%02d", it) }
-            setOnValueChangedListener { _, _, newVal ->
-                viewModel.startHour = newVal
+            setOnScrollListener { _, scrollState ->
+                if (scrollState == NumberPicker.OnScrollListener.SCROLL_STATE_IDLE) {
+                    GlobalScope.launch {
+                        delay(1000L)
+                        viewModel.startHour = value
+                    }
+                }
             }
         }
 
@@ -57,8 +69,13 @@ class TimeFragment : BottomSheetDialogFragment() {
             maxValue = 59
             value = viewModel.startMinute
             setFormatter { String.format("%02d", it) }
-            setOnValueChangedListener { _, _, newVal ->
-                viewModel.startMinute = newVal
+            setOnScrollListener { _, scrollState ->
+                if (scrollState == NumberPicker.OnScrollListener.SCROLL_STATE_IDLE) {
+                    GlobalScope.launch {
+                        delay(1000L)
+                        viewModel.startMinute = value
+                    }
+                }
             }
         }
 
@@ -67,8 +84,13 @@ class TimeFragment : BottomSheetDialogFragment() {
             maxValue = 23
             value = viewModel.endHour
             setFormatter { String.format("%02d", it) }
-            setOnValueChangedListener { _, _, newVal ->
-                viewModel.endHour = newVal
+            setOnScrollListener { _, scrollState ->
+                if (scrollState == NumberPicker.OnScrollListener.SCROLL_STATE_IDLE) {
+                    GlobalScope.launch {
+                        delay(1000L)
+                        viewModel.endHour = value
+                    }
+                }
             }
         }
 
@@ -77,8 +99,13 @@ class TimeFragment : BottomSheetDialogFragment() {
             maxValue = 59
             value = viewModel.endMinute
             setFormatter { String.format("%02d", it) }
-            setOnValueChangedListener { _, _, newVal ->
-                viewModel.endMinute = newVal
+            setOnScrollListener { _, scrollState ->
+                if (scrollState == NumberPicker.OnScrollListener.SCROLL_STATE_IDLE) {
+                    GlobalScope.launch {
+                        delay(1000L)
+                        viewModel.endMinute = value
+                    }
+                }
             }
         }
     }

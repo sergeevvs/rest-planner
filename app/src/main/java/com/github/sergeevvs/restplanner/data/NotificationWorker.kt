@@ -20,14 +20,14 @@ class NotificationWorker(
     workerParams: WorkerParameters
 ) : Worker(appContext, workerParams) {
 
+    private val wm = WorkManager.getInstance(applicationContext)
+    private val prefs = PreferencesRepository(applicationContext)
+    private val calendar = Calendar.getInstance()
+
     override fun doWork(): Result {
 
-        val wm = WorkManager.getInstance(applicationContext)
-        val prefRepository = PreferencesRepository(applicationContext)
-        val calendar = Calendar.getInstance()
-
         if (inputData.getBoolean(EXECUTE_NOTIFICATION, false) &&
-            prefRepository.isDayActive(calendar[Calendar.DAY_OF_WEEK])
+            prefs.isDayActive(calendar[Calendar.DAY_OF_WEEK])
         ) {
             with(NotificationManagerCompat.from(applicationContext)) {
                 notify(NOTIFICATION_ID, createNotification().build())
@@ -40,7 +40,7 @@ class NotificationWorker(
             ExistingWorkPolicy.REPLACE,
             OneTimeWorkRequestBuilder<NotificationWorker>()
                 .setInitialDelay(
-                    getNotificationTimeDiff(prefRepository, calendar),
+                    getNotificationTimeDiff(),
                     TimeUnit.MILLISECONDS
                 )
                 .setInputData(
@@ -50,7 +50,7 @@ class NotificationWorker(
                 )
                 .build()
         )
-        Log.d(LOG_TAG, "A new deferred notification handler has been launched.")
+        Log.d(LOG_TAG, "New notification worker started.")
 
         return Result.success()
     }
@@ -66,10 +66,7 @@ class NotificationWorker(
      * (Например сейчас 10:45, а запустить надо в 11:00, при периоде в 60 минут)
      * ИНАЧЕ -> высчитываем время старта слудующего дня + период нотификации
      * */
-    private fun getNotificationTimeDiff(
-        prefs: PreferencesRepository,
-        calendar: Calendar
-    ): Long {
+    private fun getNotificationTimeDiff(): Long {
         val period = prefs.timeToMillis(minute = prefs.notificationPeriod)
         val currentTime = calendar.timeInMillis
 
@@ -84,18 +81,21 @@ class NotificationWorker(
         var endTime = calendar.timeInMillis + prefs.timeToMillis(prefs.endHour, prefs.endMinute)
         if (endTime < startTime) endTime += 24 * 60 * 60 * 1000
 
-        return if (prefs.isDayActive(calendar[Calendar.DAY_OF_WEEK]) &&
+        val result = if (prefs.isDayActive(calendar[Calendar.DAY_OF_WEEK]) &&
             currentTime >= startTime &&
             currentTime + period < endTime
-        ) {
-            period - ((currentTime - startTime) % period)
-        } else if (prefs.isDayActive(calendar[Calendar.DAY_OF_WEEK]) &&
+        ) period - ((currentTime - startTime) % period)
+        else if (prefs.isDayActive(calendar[Calendar.DAY_OF_WEEK]) &&
             currentTime < startTime
-        ) {
-            startTime - currentTime + period
-        } else {
-            startTime - currentTime + period + (24 * 60 * 60 * 1000)
-        }
+        ) startTime - currentTime + period
+        else startTime - currentTime + period + (24 * 60 * 60 * 1000)
+
+
+        Log.d(
+            LOG_TAG,
+            "Notification delay = ${prefs.millisToTime(result)}, in millis = $result"
+        )
+        return result
     }
 
     private fun createNotification() =

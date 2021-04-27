@@ -1,11 +1,13 @@
 package com.github.sergeevvs.restplanner.presentation.viewmodels
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.work.ExistingWorkPolicy
 import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkManager
 import androidx.work.workDataOf
 import com.github.sergeevvs.restplanner.data.EXECUTE_NOTIFICATION
+import com.github.sergeevvs.restplanner.data.LOG_TAG
 import com.github.sergeevvs.restplanner.data.NotificationWorker
 import com.github.sergeevvs.restplanner.data.REST_WORK_NAME
 import com.github.sergeevvs.restplanner.data.repositories.PreferencesRepository
@@ -36,6 +38,7 @@ abstract class BaseViewModel : ViewModel() {
         } else {
             wm.cancelAllWork()
         }
+        Log.d(LOG_TAG, "Notification manager updated.")
     }
 
     fun onFragmentStop() {
