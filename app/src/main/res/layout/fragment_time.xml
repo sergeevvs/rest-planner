@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="match_parent"
     android:layout_gravity="center_horizontal"
@@ -35,14 +34,24 @@
             android:layout_height="wrap_content"
             android:text="@string/tv_time_period_prefix"
             android:textColor="?attr/colorTextOnBottomSheetDialog"
-            android:textSize="@dimen/text_size" />
+            android:textSize="@dimen/text_size"
+            android:visibility="gone" />
 
         <NumberPicker
-            android:layout_marginStart="20dp"
             android:id="@+id/time_period"
             android:layout_width="30dp"
             android:layout_height="50dp"
-            android:background="@drawable/picker_background" />
+            android:layout_marginStart="20dp"
+            android:background="@drawable/picker_background"
+            android:visibility="gone" />
+
+        <com.github.sergeevvs.restplanner.HorizontalSlider
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:maxValue="120"
+            app:minValue="10"
+            app:step="10" />
+
     </LinearLayout>
 
     <LinearLayout
