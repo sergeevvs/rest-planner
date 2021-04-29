@@ -5,6 +5,10 @@
     android:layout_height="match_parent"
     tools:context=".presentation.MainActivity">
 
-    <include layout="@layout/content_main" />
+    <!--<include layout="@layout/content_main" />-->
+
+    <com.github.sergeevvs.restplanner.HorizontalSlider
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

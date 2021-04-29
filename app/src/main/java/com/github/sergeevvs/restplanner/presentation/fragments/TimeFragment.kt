@@ -34,7 +34,13 @@ class TimeFragment : BottomSheetDialogFragment() {
 
     private fun init() {
 
-        binding.timePeriod.apply {
+        binding.horizontalSlider.apply {
+            minValue = 10
+            maxValue = 120
+            step = 10
+        }
+
+        /*binding.timePeriod.apply {
             minValue = 1
             maxValue = 12
             displayedValues = (minValue..maxValue).map { (it * 10).toString() }.toTypedArray()
@@ -47,7 +53,9 @@ class TimeFragment : BottomSheetDialogFragment() {
                     }
                 }
             }
-        }
+        }*/
+
+        // FIXME: 29.04.2021 Баг: ввести час или минуты с клавиатуры - значение не сохраняется
 
         binding.startTimeHourPicker.apply {
             minValue = 0
