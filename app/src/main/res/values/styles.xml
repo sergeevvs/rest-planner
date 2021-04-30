@@ -4,7 +4,6 @@
     <style name="RestPlanner.BottomSheetDialog" parent="Theme.MaterialComponents.BottomSheetDialog">
         <item name="bottomSheetStyle">@style/RestPlanner.BottomSheet</item>
         <item name="materialThemeOverlay">@style/Theme.RestPlanner</item>
-        <!--        <item name="textInputStyle">@style/RestPlanner.TextInputLayout</item>-->
     </style>
 
     <style name="RestPlanner.BottomSheet" parent="Widget.MaterialComponents.BottomSheet">
@@ -42,27 +41,14 @@
         <item name="android:textColor">?attr/colorTextOnBottomSheetDialog</item>
     </style>
 
-    <style name="RestPlanner.TimePicker" parent="@android:style/Widget.Material.Light.TimePicker">
-        <!--        <item name="chipStyle">@style/RestPlanner.Chip</item>-->
-        <!--        <item name="materialClockStyle">@style/RestPlanner.TimePicker.Clock</item>-->
-        <!--        <item name="shapeAppearanceOverlay">@style/RestPlanner.ShapeAppearanceOverlay</item>-->
-        <item name="android:timePickerMode">spinner</item>
-    </style>
-
-    <!--    <style name="RestPlanner.TimePicker.Clock" parent="Widget.MaterialComponents.TimePicker.Clock">
-            <item name="clockFaceBackgroundColor">@color/primaryColor</item>
-            <item name="clockHandColor">@color/secondaryColor</item>
-            <item name="clockNumberTextColor">@color/white</item>
-        </style>-->
-    <!--
-        <style name="RestPlanner.Chip" parent="Widget.MaterialComponents.TimePicker.Display">
-            <item name="android:textColor">@drawable/time_picker_selector</item>
-        </style>-->
-
     <style name="RestPlanner.ShapeAppearanceOverlay" parent="">
         <item name="cornerSize">@dimen/corner_size</item>
         <item name="cornerFamily">rounded</item>
     </style>
 
-    <style name="RestPlanner.NumberPicker" parent=""></style>
+    <style name="RestPlanner.NumberPicker" parent="">
+        <item name="android:layout_width">30dp</item>
+        <item name="android:layout_height">50dp</item>
+        <item name="android:descendantFocusability">blocksDescendants</item>
+    </style>
 </resources>

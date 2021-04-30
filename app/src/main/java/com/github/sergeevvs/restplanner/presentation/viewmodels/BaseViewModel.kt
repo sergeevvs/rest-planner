@@ -22,7 +22,7 @@ abstract class BaseViewModel : ViewModel() {
     lateinit var prefRepository: PreferencesRepository
 
     // При изменении настроек апдейтим менеджер нотификаций
-    fun updateNotificationManager() {
+    protected fun updateNotificationManager() {
         if (prefRepository.plannerActive) {
             wm.enqueueUniqueWork(
                 REST_WORK_NAME,
