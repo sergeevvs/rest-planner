@@ -3,7 +3,7 @@ package com.github.sergeevvs.restplanner.data.repositories
 import android.content.Context
 import android.content.Context.MODE_PRIVATE
 import android.util.Log
-import com.github.sergeevvs.restplanner.App
+import com.github.sergeevvs.restplanner.data.*
 import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -21,39 +21,56 @@ class PreferencesRepository @Inject constructor(@ApplicationContext appContext: 
         get() = preferences.getBoolean(PLANNER_ACTIVE, false)
         set(value) {
             preferences.edit().putBoolean(PLANNER_ACTIVE, value).apply()
+            Log.d(LOG_TAG, "Planner active has new value = $value")
         }
 
-    var notificationPeriod: Long
-        get() = preferences.getLong(NOTIFICATION_PERIOD, 600000L) // 10 minutes by default
+    var notificationPeriod: Int
+        get() = preferences.getInt(NOTIFICATION_PERIOD, 10)
         set(value) {
-            if (value >= 600000L)
-                preferences.edit().putLong(NOTIFICATION_PERIOD, value).apply()
+            if (value >= 10) {
+                preferences.edit().putInt(NOTIFICATION_PERIOD, value).apply()
+                Log.d(LOG_TAG, "Notification period has new value = $value")
+            }
         }
 
-    var startTime: Long
-        get() = preferences.getLong(START_TIME, 0L)
+    var startHour: Int
+        get() = preferences.getInt(START_HOUR, 0)
         set(value) {
-            preferences.edit().putLong(START_TIME, value).apply()
+            preferences.edit().putInt(START_HOUR, value).apply()
+            Log.d(LOG_TAG, "Start hour has new value = $value")
         }
 
-    var endTime: Long
-        get() = preferences.getLong(END_TIME, 0L)
+    var startMinute: Int
+        get() = preferences.getInt(START_MINUTE, 0)
         set(value) {
-            preferences.edit().putLong(END_TIME, value).apply()
+            preferences.edit().putInt(START_MINUTE, value).apply()
+            Log.d(LOG_TAG, "Start minute has new value = $value")
+        }
+
+    var endHour: Int
+        get() = preferences.getInt(END_HOUR, 0)
+        set(value) {
+            preferences.edit().putInt(END_HOUR, value).apply()
+            Log.d(LOG_TAG, "End hour has new value = $value")
+        }
+
+    var endMinute: Int
+        get() = preferences.getInt(END_MINUTE, 0)
+        set(value) {
+            preferences.edit().putInt(END_MINUTE, value).apply()
+            Log.d(LOG_TAG, "End minute has new value = $value")
         }
 
     fun isDayActive(day: Int) = preferences.getBoolean(day.toString(), false)
 
     fun setDayActive(day: Int, value: Boolean) {
         preferences.edit().putBoolean(day.toString(), value).apply()
-        Log.d(App.LOG_TAG, "Set $day activating in $value")
+        Log.d(LOG_TAG, "$day activating has new value = $value")
     }
 
-    companion object {
-        const val APP_SETTINGS = "app_settings"
-        const val PLANNER_ACTIVE = "planner_active"
-        const val NOTIFICATION_PERIOD = "notification_period"
-        const val START_TIME = "start_time"
-        const val END_TIME = "end_time"
-    }
+    fun timeToMillis(hour: Int = 0, minute: Int = 0) =
+        ((hour * 60 * 60 * 1000) + (minute * 60 * 1000)).toLong()
+
+    fun millisToTime(millis: Long) =
+        (millis / 1000 / 60 / 60).toInt() to (millis / 1000 / 60 % 60).toInt()
 }

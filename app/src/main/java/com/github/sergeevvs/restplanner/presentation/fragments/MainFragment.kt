@@ -5,9 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.github.sergeevvs.restplanner.data.DAYS_FRAGMENT_TAG
 import com.github.sergeevvs.restplanner.databinding.FragmentMainBinding
 import com.github.sergeevvs.restplanner.presentation.viewmodels.MainViewModel
-import com.google.android.material.switchmaterial.SwitchMaterial
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -33,29 +33,62 @@ class MainFragment : Fragment() {
     }
 
     private fun init() {
+
         binding.switchPlannerState.isChecked = viewModel.plannerActive
+
+        binding.edNotificationPeriod.setText(viewModel.notificationPeriod.toString())
+
+        binding.startTimeHourPicker.apply {
+            minValue = 0
+            maxValue = 23
+            value = viewModel.startHour
+            setFormatter { String.format("%02d", it) }
+        }
+
+        binding.startTimeMinutePicker.apply {
+            minValue = 0
+            maxValue = 59
+            value = viewModel.startMinute
+            setFormatter { String.format("%02d", it) }
+        }
+
+        binding.endTimeHourPicker.apply {
+            minValue = 0
+            maxValue = 23
+            value = viewModel.endHour
+            setFormatter { String.format("%02d", it) }
+        }
+
+        binding.endTimeMinutePicker.apply {
+            minValue = 0
+            maxValue = 59
+            value = viewModel.endMinute
+            setFormatter { String.format("%02d", it) }
+        }
     }
 
     private fun initListeners() {
-        binding.switchPlannerState.setOnClickListener { onSwitchClicked(it) }
-        binding.btnTime.setOnClickListener { onBtnTimeClicked() }
         binding.btnDays.setOnClickListener { onBtnDaysClicked() }
-    }
-
-    private fun onSwitchClicked(view: View) {
-        viewModel.plannerActive = ((view as SwitchMaterial).isChecked)
-    }
-
-    private fun onBtnTimeClicked() {
-        TimeFragment().show(parentFragmentManager, TIME_FRAGMENT_TAG)
     }
 
     private fun onBtnDaysClicked() {
         DaysFragment().show(parentFragmentManager, DAYS_FRAGMENT_TAG)
     }
 
-    companion object {
-        const val TIME_FRAGMENT_TAG = "time_fragment"
-        const val DAYS_FRAGMENT_TAG = "days_fragment"
+    override fun onStop() {
+        super.onStop()
+
+        saveParams()
+        viewModel.onFragmentStop()
+    }
+
+    private fun saveParams() {
+        viewModel.plannerActive = binding.switchPlannerState.isChecked
+        viewModel.notificationPeriod =
+            binding.edNotificationPeriod.text.toString().toIntOrNull() ?: 0
+        viewModel.startHour = binding.startTimeHourPicker.value
+        viewModel.startMinute = binding.startTimeMinutePicker.value
+        viewModel.endHour = binding.endTimeHourPicker.value
+        viewModel.endMinute = binding.endTimeMinutePicker.value
     }
 }

@@ -4,15 +4,14 @@
     <style name="RestPlanner.BottomSheetDialog" parent="Theme.MaterialComponents.BottomSheetDialog">
         <item name="bottomSheetStyle">@style/RestPlanner.BottomSheet</item>
         <item name="materialThemeOverlay">@style/Theme.RestPlanner</item>
-<!--        <item name="textInputStyle">@style/RestPlanner.TextInputLayout</item>-->
     </style>
 
     <style name="RestPlanner.BottomSheet" parent="Widget.MaterialComponents.BottomSheet">
-        <item name="shapeAppearanceOverlay">@style/RestPlanner.ShapeAppearanceOverlay</item>
+        <item name="shapeAppearanceOverlay">@style/RestPlanner.BottomShapeAppearanceOverlay</item>
         <item name="backgroundTint">?attr/colorBottomSheetDialog</item>
     </style>
 
-    <style name="RestPlanner.ShapeAppearanceOverlay" parent="">
+    <style name="RestPlanner.BottomShapeAppearanceOverlay" parent="">
         <item name="cornerSize">0dp</item>
         <item name="cornerFamily">rounded</item>
         <item name="cornerSizeTopLeft">@dimen/corner_size</item>
@@ -20,32 +19,36 @@
     </style>
 
     <style name="RestPlanner.TextView" parent="Widget.MaterialComponents.TextView">
+        <item name="android:textColor">?android:attr/textColorPrimary</item>
         <item name="android:textSize">@dimen/text_size</item>
     </style>
 
-    <style name="RestPlanner.RadioButton" parent="Widget.MaterialComponents.CompoundButton.RadioButton">
-        <item name="android:textSize">@dimen/rb_text_size</item>
-        <item name="android:padding">@dimen/rb_padding</item>
-        <item name="android:textColor">?attr/colorTextOnBottomSheetDialog</item>
-    </style>
-
     <style name="RestPlanner.CheckBox" parent="Widget.MaterialComponents.CompoundButton.CheckBox">
-        <item name="android:textColor">?attr/colorTextOnBottomSheetDialog</item>
+        <item name="android:textColor">?android:attr/textColorPrimary</item>
         <item name="android:textSize">16sp</item>
     </style>
 
     <style name="RestPlanner.Switch" parent="Widget.MaterialComponents.CompoundButton.Switch">
-        <item name="android:ems">12</item>
-        <item name="android:textColor">?attr/colorTextOnBottomSheetDialog</item>
-        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">?android:attr/textColorPrimary</item>
+        <item name="android:textSize">@dimen/title_text_size</item>
     </style>
 
     <style name="RestPlanner.Button" parent="Widget.MaterialComponents.Button">
-        <item name="android:backgroundTint">@color/secondaryDarkColor</item>
         <item name="android:textAllCaps">false</item>
     </style>
 
     <style name="RestPlanner.EditText" parent="Widget.AppCompat.EditText">
-        <item name="android:textColor">?attr/colorTextOnBottomSheetDialog</item>
+        <item name="android:textColor">?android:attr/textColorPrimary</item>
+    </style>
+
+    <style name="RestPlanner.ShapeAppearanceOverlay" parent="">
+        <item name="cornerSize">@dimen/corner_size</item>
+        <item name="cornerFamily">rounded</item>
+    </style>
+
+    <style name="RestPlanner.NumberPicker" parent="">
+        <item name="android:layout_width">30dp</item>
+        <item name="android:layout_height">60dp</item>
+        <item name="android:descendantFocusability">blocksDescendants</item>
     </style>
 </resources>
