@@ -31,21 +31,24 @@
         <com.google.android.material.textview.MaterialTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/tv_time_period_prefix"
-            android:textColor="?attr/colorTextOnBottomSheetDialog"
-            android:textSize="@dimen/text_size" />
+            android:text="@string/tv_time_period_prefix" />
 
         <EditText
             android:id="@+id/ed_notification_period"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/margin"
             android:ems="2"
             android:gravity="center"
             android:importantForAutofill="no"
             android:inputType="number"
             android:lines="1"
-            android:maxLength="3" />
+            android:maxLength="3"
+            android:textSize="@dimen/text_size" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tv_time_period_postfix" />
 
     </LinearLayout>
 
@@ -53,11 +56,18 @@
         android:id="@+id/ll_active_period"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin"
         android:gravity="center"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/ll_time_period">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingEnd="@dimen/rb_padding"
+            android:text="@string/start" />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -70,12 +80,11 @@
                 android:id="@+id/start_time_hour_picker"
                 style="@style/RestPlanner.NumberPicker" />
 
-            <TextView
+            <com.google.android.material.textview.MaterialTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@null"
-                android:text=":"
-                android:textColor="@color/white" />
+                android:text="@string/time_picker_divider" />
 
             <NumberPicker
                 android:id="@+id/start_time_minute_picker"
@@ -83,11 +92,12 @@
 
         </LinearLayout>
 
-        <TextView
+        <com.google.android.material.textview.MaterialTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="  -  "
-            android:textColor="@color/white" />
+            android:paddingStart="@dimen/layout_padding"
+            android:paddingEnd="@dimen/rb_padding"
+            android:text="@string/end" />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -100,11 +110,10 @@
                 android:id="@+id/end_time_hour_picker"
                 style="@style/RestPlanner.NumberPicker" />
 
-            <TextView
+            <com.google.android.material.textview.MaterialTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text=":"
-                android:textColor="@color/white" />
+                android:text="@string/time_picker_divider" />
 
             <NumberPicker
                 android:id="@+id/end_time_minute_picker"
@@ -114,7 +123,7 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_days"
-        android:layout_width="120dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin"
         android:text="@string/days"
@@ -122,14 +131,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ll_active_period" />
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn_save_settings"
-        android:layout_width="120dp"
+    <com.google.android.material.textview.MaterialTextView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin"
-        android:text="@string/save_settings"
+        android:text="@string/tv_settings_helper_text"
+        android:textAlignment="center"
+        android:textColor="@color/dark_gray"
+        android:textSize="@dimen/helper_text_size"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_days" />
+        app:layout_constraintStart_toStartOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

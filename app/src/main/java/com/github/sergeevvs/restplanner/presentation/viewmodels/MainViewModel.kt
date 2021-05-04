@@ -39,8 +39,4 @@ class MainViewModel @Inject constructor() : BaseViewModel() {
         set(value) {
             prefRepository.endMinute = value
         }
-
-    fun onSaveParams() {
-        updateNotificationManager()
-    }
 }

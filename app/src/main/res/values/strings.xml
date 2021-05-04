@@ -26,11 +26,11 @@
     <string name="saturday">Суббота</string>
     <string name="sunday">Воскресенье</string>
     <string name="notification_title">Время отдохнуть от работы ^_^</string>
-    <string name="tv_time_period_prefix">Периодичность оповещений</string>
+    <string name="tv_time_period_prefix">Периодичность:</string>
     <string name="tv_time_period_postfix">минут</string>
     <string name="end">до</string>
     <string name="start">с</string>
     <string name="save_settings">Сохранить</string>
-    <string name="snackbar_save_settings">Настройки успешно сохранены</string>
-    <string name="notification_period_error">Период оповещений должен быть больше 10 минут!</string>
+    <string name="tv_settings_helper_text">Настройки будут автоматически сохранены после выхода из приложения</string>
+    <string name="time_picker_divider">:</string>
 </resources>
