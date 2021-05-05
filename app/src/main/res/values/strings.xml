@@ -28,9 +28,8 @@
     <string name="notification_title">Время отдохнуть от работы ^_^</string>
     <string name="tv_time_period_prefix">Периодичность:</string>
     <string name="tv_time_period_postfix">минут</string>
-    <string name="end">до</string>
-    <string name="start">с</string>
-    <string name="save_settings">Сохранить</string>
+    <string name="tv_to_time">до</string>
+    <string name="tv_from_time">с</string>
     <string name="tv_settings_helper_text">Настройки будут автоматически сохранены после выхода из приложения</string>
     <string name="time_picker_divider">:</string>
 </resources>

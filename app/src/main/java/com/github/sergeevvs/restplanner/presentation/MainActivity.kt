@@ -31,7 +31,7 @@ class MainActivity : AppCompatActivity() {
                 enableVibration(true)
                 vibrationPattern = longArrayOf(0, 200, 200, 200)
                 enableLights(true)
-                lightColor = Color.RED
+                lightColor = Color.BLUE
             }
             val notificationManager =
                 getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
