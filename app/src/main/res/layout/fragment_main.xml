@@ -136,7 +136,7 @@
         android:layout_marginHorizontal="@dimen/layout_padding"
         android:text="@string/tv_settings_helper_text"
         android:textAlignment="center"
-        android:textColor="@color/dark_gray"
+        android:textColor="?attr/colorHelperText"
         android:textSize="@dimen/helper_text_size"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
