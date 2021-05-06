@@ -2,19 +2,19 @@
     <!-- Base application theme. -->
     <style name="Theme.RestPlanner" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/primaryColor</item>
-        <item name="colorPrimaryVariant">@color/primaryDarkColor</item>
-        <item name="colorOnPrimary">@color/primaryTextColor</item>
-        <item name="android:textColorPrimary">@color/black</item>
+        <item name="colorPrimary">@color/nightPrimaryColor</item>
+        <item name="colorPrimaryVariant">@color/nightPrimaryDarkColor</item>
+        <item name="colorOnPrimary">@color/nightPrimaryTextColor</item>
+        <item name="android:textColorPrimary">@color/white</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/secondaryColor</item>
-        <item name="colorSecondaryVariant">@color/secondaryDarkColor</item>
-        <item name="colorOnSecondary">@color/secondaryTextColor</item>
-        <item name="android:textColorSecondary">@color/black</item>
+        <item name="colorSecondary">@color/nightSecondaryColor</item>
+        <item name="colorSecondaryVariant">@color/nightSecondaryDarkColor</item>
+        <item name="colorOnSecondary">@color/nightSecondaryTextColor</item>
+        <item name="android:textColorSecondary">@color/white</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Other colors. -->
-        <item name="android:colorBackground">@color/backgroundColor</item>
+        <item name="android:colorBackground">@color/nightBackgroundColor</item>
         <!-- Customize your theme here. -->
         <item name="bottomSheetDialogTheme">@style/RestPlanner.BottomSheetDialog</item>
         <item name="android:textViewStyle">@style/RestPlanner.TextView</item>
@@ -23,7 +23,7 @@
         <item name="materialButtonStyle">@style/RestPlanner.Button</item>
         <item name="editTextStyle">@style/RestPlanner.EditText</item>
         <!-- Custom attrs. -->
-        <item name="colorBottomSheetDialog">@color/backgroundColor</item>
-        <item name="colorHelperText">@color/dark_gray</item>
+        <item name="colorBottomSheetDialog">@color/nightBackgroundColor</item>
+        <item name="colorHelperText">@color/light_gray</item>
     </style>
 </resources>

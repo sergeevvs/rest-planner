@@ -6,119 +6,117 @@
     android:layout_height="match_parent"
     android:focusable="true"
     android:focusableInTouchMode="true"
-    android:padding="@dimen/layout_padding">
+    android:paddingVertical="@dimen/layout_padding">
 
     <com.google.android.material.switchmaterial.SwitchMaterial
         android:id="@+id/switch_planner_state"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:ems="10"
         android:text="@string/rest_enabled"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/guideline_end_content"
+        app:layout_constraintStart_toStartOf="@id/guideline_start_content"
         app:layout_constraintTop_toTopOf="parent"
         tools:checked="true" />
 
-    <LinearLayout
-        android:id="@+id/ll_time_period"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/switch_planner_state">
-
-        <com.google.android.material.textview.MaterialTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/tv_time_period_prefix" />
-
-        <EditText
-            android:id="@+id/ed_notification_period"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ems="2"
-            android:gravity="center"
-            android:importantForAutofill="no"
-            android:inputType="number"
-            android:lines="1"
-            android:maxLength="3"
-            android:textSize="@dimen/text_size" />
-
-        <com.google.android.material.textview.MaterialTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/tv_time_period_postfix" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/ll_active_period"
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tv_period_prefix"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin"
+        android:text="@string/tv_time_period_prefix"
+        app:layout_constraintStart_toStartOf="@id/guideline_start_content"
+        app:layout_constraintTop_toBottomOf="@id/switch_planner_state" />
+
+    <EditText
+        android:id="@+id/ed_notification_period"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="2"
+        android:gravity="center"
+        android:importantForAutofill="no"
+        android:inputType="number"
+        android:lines="1"
+        android:maxLength="3"
+        android:textSize="@dimen/text_size"
+        app:layout_constraintBaseline_toBaselineOf="@id/tv_period_postfix"
+        app:layout_constraintEnd_toStartOf="@id/tv_period_postfix" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tv_period_postfix"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tv_time_period_postfix"
+        app:layout_constraintBaseline_toBaselineOf="@id/tv_period_prefix"
+        app:layout_constraintEnd_toEndOf="@id/guideline_end_content" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tv_from_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tv_from_time"
+        app:layout_constraintBottom_toBottomOf="@id/ll_start_time"
+        app:layout_constraintStart_toStartOf="@id/guideline_start_content"
+        app:layout_constraintTop_toTopOf="@id/ll_start_time" />
+
+    <LinearLayout
+        android:id="@+id/ll_start_time"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_marginStart="@dimen/margin"
+        android:layout_marginTop="@dimen/margin"
+        android:background="@drawable/picker_background"
         android:gravity="center"
         android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/ll_time_period">
+        app:layout_constraintStart_toEndOf="@id/tv_from_time"
+        app:layout_constraintTop_toBottomOf="@id/ed_notification_period">
+
+        <NumberPicker
+            android:id="@+id/start_time_hour_picker"
+            style="@style/RestPlanner.NumberPicker" />
 
         <com.google.android.material.textview.MaterialTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingEnd="@dimen/rb_padding"
-            android:text="@string/start" />
+            android:background="@null"
+            android:text="@string/time_picker_divider" />
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:background="@drawable/picker_background"
-            android:gravity="center"
-            android:orientation="horizontal">
+        <NumberPicker
+            android:id="@+id/start_time_minute_picker"
+            style="@style/RestPlanner.NumberPicker" />
+    </LinearLayout>
 
-            <NumberPicker
-                android:id="@+id/start_time_hour_picker"
-                style="@style/RestPlanner.NumberPicker" />
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tv_to_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/margin"
+        android:text="@string/tv_to_time"
+        app:layout_constraintBottom_toBottomOf="@id/ll_end_time"
+        app:layout_constraintEnd_toStartOf="@id/ll_end_time"
+        app:layout_constraintTop_toTopOf="@id/ll_end_time" />
 
-            <com.google.android.material.textview.MaterialTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@null"
-                android:text="@string/time_picker_divider" />
+    <LinearLayout
+        android:id="@+id/ll_end_time"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:background="@drawable/picker_background"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="@id/guideline_end_content"
+        app:layout_constraintTop_toTopOf="@id/ll_start_time">
 
-            <NumberPicker
-                android:id="@+id/start_time_minute_picker"
-                style="@style/RestPlanner.NumberPicker" />
-
-        </LinearLayout>
+        <NumberPicker
+            android:id="@+id/end_time_hour_picker"
+            style="@style/RestPlanner.NumberPicker" />
 
         <com.google.android.material.textview.MaterialTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingStart="@dimen/layout_padding"
-            android:paddingEnd="@dimen/rb_padding"
-            android:text="@string/end" />
+            android:text="@string/time_picker_divider" />
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:background="@drawable/picker_background"
-            android:gravity="center"
-            android:orientation="horizontal">
-
-            <NumberPicker
-                android:id="@+id/end_time_hour_picker"
-                style="@style/RestPlanner.NumberPicker" />
-
-            <com.google.android.material.textview.MaterialTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/time_picker_divider" />
-
-            <NumberPicker
-                android:id="@+id/end_time_minute_picker"
-                style="@style/RestPlanner.NumberPicker" />
-        </LinearLayout>
+        <NumberPicker
+            android:id="@+id/end_time_minute_picker"
+            style="@style/RestPlanner.NumberPicker" />
     </LinearLayout>
 
     <com.google.android.material.button.MaterialButton
@@ -127,20 +125,36 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin"
         android:text="@string/days"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ll_active_period" />
+        app:layout_constraintEnd_toEndOf="@id/guideline_end_content"
+        app:layout_constraintStart_toStartOf="@id/guideline_start_content"
+        app:layout_constraintTop_toBottomOf="@id/ll_start_time"
+        app:layout_goneMarginTop="@dimen/margin" />
 
     <com.google.android.material.textview.MaterialTextView
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/layout_padding"
         android:text="@string/tv_settings_helper_text"
         android:textAlignment="center"
-        android:textColor="@color/dark_gray"
+        android:textColor="?attr/colorHelperText"
         android:textSize="@dimen/helper_text_size"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_start_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.15" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_end_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.85" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
